@@ -629,6 +629,70 @@ Examples of Target Leakage:
     develop new variables (e.g., principal components, to be introduced
     in Section \@ref(6.1) for predicting the same target variable.
 
+### Stage 3: Exploratory Data Analysis {#sec-stage-3-exploratory-data-analysis}
+
+After we have collected and validated the data, the next step is to
+perform exploratory data analysis, with the goal of understanding the
+characteristics of and the key relationships among variables in the
+data. This activity deserves a longer treatment and we will defer it to
+Chapter \@ref(2)
+
+### Stage 4: Model Construction, Evaluation and Selection {#sec-stage-4-model-construction-evaluation-selection}
+
+If we use all of the collected data for model fitting, that will leave
+no independent data for assessing the prediction performance of our
+models.
+
+#### **Training / Test Set Split** {#sec-training-test-set-split}
+
+To construct a model that thrives on future data, it is common practice
+to partition our data into a few parts, each of which serves a different
+role in the model development and evaluation process.
+
+In the simplest form, the partition splits the full data into two parts,
+the training set and the test set.
+
+1.  **Training Set (70-80% of Full Data):**
+    -   The larger part of the full data, the training set, is where you
+        "train", fit, or develop your predictive model to estimate the
+        signal function $f$ and, if needed, the model parameters.
+    -   The training is typically done by optimizing a certain objective
+        function that describes how well the model matches the training
+        observations.
+    -   After the model has been trained, it is ready for making
+        predictions on the other part of the full data.
+2.  **Test Set (20-30% of Full Data):**
+    -   Following the fitting, you will apply the trained model to make
+        a prediction for each observation of the test set, or test data,
+        and assess the prediction performance of the model according to
+        certain performance metrics.
+    -   Observations in this test set did not participate in the model
+        training and will provide much more objective ground for
+        evaluating prediction performance when the model is applied to
+        new, future data.
+    -   In contrast, evaluating the model on the training set will give
+        an overly optimistic and somewhat misleading picture of its true
+        predictive performance – the model has already seen the training
+        observations and is merely fitting, not predicting those
+        observations.
+
+**How Does it Work?**
+
+$$
+\underset{\Downarrow}{\text{Before fitting models, split the data into
+the training set (70-80%) and the test set (20-30%)}} 
+\\
+\text{Models are fitted to} \Rightarrow \textbf{Training Set} 
+\\
+\text{Prediction performance is evaluated on}\Rightarrow\textbf{Training Set}
+\\
+
+\text{Test set observations must be truly }\underline{unseen}\text{to the trained model}
+$$
+**Why Do The Split?**
+
+
+
 ## Bias-Variance Trade-off {#bias-variance-trade-off}
 
 ## Feature Generation and Selection {#feature-generation-and-selection}
