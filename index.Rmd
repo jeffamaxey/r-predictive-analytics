@@ -1,23 +1,219 @@
 ---
-title: "RapidBook"
-author: "Jon Areas"
-date: "`r Sys.Date()`"
+title: "Predictive Analytics"
+subtitle: "Theory of and Use Cases in Predictive Analytics Using R"
+author: "Jeff Maxey"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+github-repo: "jeffamaxey/r-predictive-analytics"
+url: 'https://jeffamaxey.github.io/r-predictive-analytics/'
+graphics: yes
+cover-image: "images/cover.jpg"
+documentclass: krantz
+bibliography: [book.bib, packages.bib]
+# bibliography: ["bib/articles.bib", "bib/books.bib", "bib/packages.bib"]
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+fontsize: 12pt
 site: bookdown::bookdown_site
-github-repo: "jxareas/RapidBook"
-url: 'https://jxareas.github.io/RapidBook/'
-description: "A template to rapidly deploy Python/R based books using Bookdown."
+description: "A practical textbook on predictive analytics for actuarial science, featuring real-world case studies with diverse datasets. Designed for actuarial scholars and professionals, it emphasizes real data from the authors' research. Readers will gain valuable tools and a deeper appreciation for data-driven modeling in actuarial science."
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-
-# Here you load all your project's packages
-library(ggplot2)
-library(dplyr)
+```{r include = TRUE}
+source("_common.R")
 ```
 
-# Preliminary Information {.unnumbered}
+# Preface {#preface .unnumbered}
 
-This is an artificial book to demonstrate the look of the [RapidBook Template](https://github.com/jxareas/RapidBook), which is a template to rapidly deploy either Python or R based books using Bookdown.
+--------------------------------------------------------------------------------
 
-As this uses R Markdown, Python must be used through the `reticulate` interface.
+
+`r if (knitr::is_latex_output()) '<!--'`
+
+
+```{r, cover, fig.show='hold', echo=FALSE, out.width='100%', fig.align='center', out.extra='style="background-color: #000000; padding:2px; display: inline-block;"',include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://jeffamaxey.github.io/r-predictive-analytics/'}
+if (knitr::is_html_output()) {
+  knitr::include_graphics("images/cover-image.jpg", dpi = NA)
+}
+```
+
+Welcome!  This is the [online version](https://jeffamaxey.github.io/r-predictive-analytics/) of _**Predictive Analytics: Theory of and Case Studies in Predictive Analytics Using R**_.
+
+This is the online version of the `r colorize("SOA Exam PA Study Notes", "red")`, a guide that is
+**`r colorize("currently under early development", "red")` and intended for to be released on
+[Github](https://www.github.com/jeffamaxey/r-predictive-analytics/) at a later
+date.
+
+This document was designed to capture study notes from the reading of the ACTEX
+Study Manual for Exam PA, and encapsulates all chapters of the SOA Exam Syllabus
+in preparation of taking the Predictive Analytics Exam (Exam PA). Throughout
+this guide, we the goal is to gain a deeper understanding of the basics of R
+programming, the theory of and relevent case studies in predictive analytics,
+and provide final preparation tactics in the form of a discussion on past exams,
+sample mock exams, and a formula sheet.
+
+## Description {#description .unnumbered}
+
+`r colorize("Predictive Analytics in R", "red")`is a textbook on predictive analytics for actuarial science, featuring applied case studies covering numerous unique real data sets. 
+This textbook is intended to be accessible to scholars and professionals. We believe strongly in case studies featuring real data and real research applications; thus, most of the data in the textbook arises from collaborative research conducted by the authors during their professional work or academic coursework. 
+
+After working through the material in this manual, readers will have developed an expanded toolkit and a greater appreciation for the wide world of predictive 
+modeling and actuarial science.
+
+## **Table of Contents** {-}
+
+```{r, echo = FALSE, messages=FALSE, warning=FALSE}
+library(tidyverse)
+library(tibble)
+library(kableExtra)
+
+# Create a data frame
+df.chapters <- data.frame(
+  Chapter = paste("", 1:11),
+  Title = c(
+    "Overview of Predictive Analytics",
+    "Data Exploration and Visualization",
+    "Linear Models",
+    "Decision Trees",
+    "Generalized Linear Models",
+    "Logistic Regression",
+    "Correlated Data",
+    "Introduction to Multilevel Models",
+    "Two-Level Longitudinal Data",
+    "Multilevel Data with More Than Two Levels",
+    "Multilevel Generalized Linear Models"
+  ),
+  Description = c(
+    "Introduction to predictive analytics concepts and workflow.",
+    "Exploring and visualizing data, with a focus on beta distributions.",
+    "Understanding and applying linear regression models.",
+    "Building and interpreting decision trees for predictive modeling.",
+    "Extending linear models to generalized linear models (GLMs).",
+    "Using logistic regression for classification problems.",
+    "Handling correlated data in predictive modeling.",
+    "Basics of multilevel modeling and its applications.",
+    "Analyzing longitudinal data with two levels of hierarchy.",
+    "Extending multilevel models to datasets with more than two levels.",
+    "Applying generalized linear models in multilevel data structures."
+  )
+)
+
+
+kable(df.chapters,
+  booktabs = TRUE,
+  linesep = "",
+  longtable = TRUE,
+  col.names = c("Chapter", "Title", "Description"),
+  caption = "Table of Contents"
+) %>% kable_style()
+```
+
+Three types of exercises are available for each chapter:
+
+-   **`r colorize("Conceptual Exercises", "red")`** ask about key ideas in the contexts of case studies
+    from the chapter and additional research articles where those ideas appear.\
+-   **`r colorize("Guided Exercises", "red")`** provide real data sets with background descriptions and
+    lead students step-by-step through a set of questions to explore the data,
+    build and interpret models, and address key research questions.\
+-   **`r colorize("Open-Ended Exercises", "red")`** provide real data sets with contextual descriptions
+    and ask students to explore key questions without prescribing specific
+    steps.
+
+Source code and solutions to all exercises in this manual will be available at
+the projects [Github Repository](https://jeffamaxey.github.io/r-predictive-analytics/).
+
+
+```{block2, type='rmdnote'}
+**Note**: This book follows the ACTEX Exam PA study manual and contains study notes from readings in the ACTEX manual. The online version of the ACTEX manual is available and highly recommended for purchase here at [ACTEXmadriver.com](https://www.ACTEXlearning.com/exams/pa).
+```
+
+## System Requirements {#system-requirements .unnumbered}
+
+This book was written in [RStudio](http://www.rstudio.com/ide/) using
+[bookdown](http://bookdown.org/).
+
+The [website](http://jeffamaxey.github.io/soa-exam-pa) is hosted with [Github
+Pages](https://github.com/), and automatically updated after every commit by
+[Github Actions](https://github.com/features/actions). The complete source is
+available from [GitHub](https://github.com/jeffamaxey/soa-exa-pa).
+
+This version of the book was built with **`r R.version.string`** and the following packages:
+
+```{r, echo = FALSE, message=FALSE, warnings=FALSE}
+library(tidyverse)
+library(tibble)
+library(kableExtra)
+
+required.pkgs <- c(
+  "bookdown", "boot", "broom", "bslib", "caret", "cli", "curl", "data.table",
+  "desc", "downlit", "dplyr", "DT", "formatR", "fs", "gapminder", "GGally",
+  "ggforce", "ggmosaic", "ggplot2", "gh", "glmnet", "globals", "glue",
+  "gridExtra", "hexSticker", "Hmisc", "ICC", "ISLR", "janitor", "jsonlite",
+  "jtools", "kableExtra", "knitr", "lares", "lattice", "lme4", "magick", "MASS",
+  "methods", "mice", "mnormt", "mosaic", "multcomp", "nlme", "openintro",
+  "pander", "png", "pROC", "profvis", "pscl", "purrr", "remotes", "renv",
+  "reshape2", "rlang", "rmarkdown", "rpart", "rpart.plot", "rsample", "rsconnect",
+  "RSQLite", "sessioninfo", "shiny", "shinycssloaders", "shinyFeedback",
+  "shinyloadtest", "shinytest", "shinythemes", "styler", "sysfonts", "testthat",
+  "thematic", "tibble", "tidyverse", "tinytex", "vctrs", "vroom", "waiter",
+  "waldo", "webshot", "xfun", "xml2", "xtable", "yaml", "zeallot"
+)
+
+package_info(required.pkgs) %>%
+  tibble::as_tibble() %>%
+  dplyr::filter(attached == TRUE) %>%
+  dplyr::select(package, version = ondiskversion) %>%
+  kable(
+    booktabs = TRUE,
+    linesep = "",
+    longtable = TRUE,
+    digits = 2,
+    big.mark = ",",
+    scientific = FALSE,
+    col.names = c("R package", "Version Used"),
+    caption = "R Packages"
+  ) %>%
+  kable_styling()
+```
+
+If you are seeing different results than what is in the book, we recommend
+installing the exact version of the packages we used. This can be done by first
+installing the `remotes` package via **`install.packages("remotes")`**. 
+
+Then, use **`install_version()`** replacing the **`package`** argument with the package name in quotes and the **`version`** argument with the particular version number to install. For example:: 
+
+
+```{r eval=FALSE}
+remotes::install_version(package = "broom", version = "0.5.6")
+```
+
+We do not add prompts (**`>`** and **`+`**) to R source code in this book, and we comment out the text output with two hashes **`##`** by default, as you can see from the R session information above. This is for your convenience when you want to copy and run the code (the text output will be ignored since it is commented out). 
+
+Package names are in bold text (e.g., **rmarkdown**), and inline code and
+file names are formatted in a typewriter font (e.g., **`knitr::knit('foo.Rmd')`**). Function names are followed by parentheses (e.g., **`bookdown::render_book()`**). The double-colon operator **`::`** means accessing an object from a package.
+
+## Acknowledgments {#acknowledgments .unnumbered}
+
+I would like to extend my deepest gratitude to everyone who contributed to the
+development of this book.
+
+A special thanks to my professors, mentors, colleagues and peers for their invaluable guidance and insightful feedback throughout this project. Their expertise in actuarial science, predictive analytics, and statistical modeling greatly enhanced the quality of this work. 
+
+This guide is dedicated to all aspiring actuaries and data scientists who seek to leverage predictive analytics to drive better decision-making.
+
+```{block2, type='flushright', html.tag='p'}
+J.M.
+Chicago, Illinois
+```
+
+```{block, include=is_html_output()}
+**Copyright**
+
+© 2025 by Corporation. Except as permitted under U.S. copyright law, no part of this book may be reprinted, reproduced, transmitted, or utilized in any form by an electronic, mechanical, or other means, now known or hereafter invented, including photocopying, microfilming, and recording, or in any information storage or retrieval system, without written permission from the publishers.
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This
+work is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+```

@@ -5,13 +5,11 @@ library(reticulate)
 
 # Render Book -------------------------------------------------------------
 
-render <- function(index="index.Rmd", showOnRender = T) {
+render <- function(index = "index.Rmd", showOnRender = T) {
   render_book(index)
-  if(showOnRender)
+  if (showOnRender) {
     browseURL("docs/index.html")
+  }
 }
 
 render()
-
-
-

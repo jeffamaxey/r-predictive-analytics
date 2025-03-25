@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Overview of Predictive Analytics | Predictive Analytics</title>
+  <meta name="description" content="A practical textbook on predictive analytics for actuarial science, featuring real-world case studies with diverse datasets. Designed for actuarial scholars and professionals, it emphasizes real data from the authors’ research. Readers will gain valuable tools and a deeper appreciation for data-driven modeling in actuarial science." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Overview of Predictive Analytics | Predictive Analytics" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://jeffamaxey.github.io/r-predictive-analytics/images/cover.jpg" />
+  <meta property="og:description" content="A practical textbook on predictive analytics for actuarial science, featuring real-world case studies with diverse datasets. Designed for actuarial scholars and professionals, it emphasizes real data from the authors’ research. Readers will gain valuable tools and a deeper appreciation for data-driven modeling in actuarial science." />
+  <meta name="github-repo" content="jeffamaxey/r-predictive-analytics" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Overview of Predictive Analytics | Predictive Analytics" />
+  
+  <meta name="twitter:description" content="A practical textbook on predictive analytics for actuarial science, featuring real-world case studies with diverse datasets. Designed for actuarial scholars and professionals, it emphasizes real data from the authors’ research. Readers will gain valuable tools and a deeper appreciation for data-driven modeling in actuarial science." />
+  <meta name="twitter:image" content="https://jeffamaxey.github.io/r-predictive-analytics/images/cover.jpg" />
+
+<meta name="author" content="Jeff Maxey" />
+
+
+<meta name="date" content="2025-03-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Predictive Analytics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#description"><i class="fa fa-check"></i>Description</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#table-of-contents"><i class="fa fa-check"></i><strong>Table of Contents</strong></a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#system-requirements"><i class="fa fa-check"></i>System Requirements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction to Predictive Analytics</b></span></li>
+<li class="chapter" data-level="1" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html"><i class="fa fa-check"></i><b>1</b> Overview of Predictive Analytics</a>
+<ul>
+<li class="chapter" data-level="" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1.1" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html#basic-terminology"><i class="fa fa-check"></i><b>1.1</b> Basic Terminology</a></li>
+<li class="chapter" data-level="1.2" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html#the-model-building-process"><i class="fa fa-check"></i><b>1.2</b> The Model Building Process</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html#stage-1-problem-definition"><i class="fa fa-check"></i><b>1.2.1</b> Stage 1: Problem Definition</a></li>
+<li class="chapter" data-level="1.2.2" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html#stage-2-data-collection-and-validation"><i class="fa fa-check"></i><b>1.2.2</b> Stage 2: Data Collection and Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html#bias-variance-trade-off"><i class="fa fa-check"></i><b>1.3</b> Bias-Variance Trade-off</a></li>
+<li class="chapter" data-level="1.4" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html#feature-generation-and-selection"><i class="fa fa-check"></i><b>1.4</b> Feature Generation and Selection</a></li>
+<li class="chapter" data-level="1.5" data-path="overview-of-predictive-analytics.html"><a href="overview-of-predictive-analytics.html#conceptual-review-questions-for-chapter-1"><i class="fa fa-check"></i><b>1.5</b> Conceptual Review Questions for Chapter 1</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/jeffamaxey/r-predictive-analytics" target="blank">GitHub Homepage</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Predictive Analytics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="overview-of-predictive-analytics" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Overview of Predictive Analytics<a href="overview-of-predictive-analytics.html#overview-of-predictive-analytics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level2 unnumbered hasAnchor">
+<h2>Introduction<a href="overview-of-predictive-analytics.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This foundational chapter streamlines the material scattered in
+different parts of the PA e-learning modules and provides a broad and
+coherent introduction to predictive analytics.</p>
+<p>Setting the scene for pretty much everything that comes later, it walks
+you through the main steps in building a predictive model and presents
+the fundamental concepts in predictive analytics that you will see
+repeatedly in the rest of this manual.</p>
+<p>These concepts are universally applicable in the sense that they apply
+to essentially all types of predictive model, and will be illustrated in
+the context of specific types of model (GLMs and decision trees, in
+particular) in later chapters.</p>
+<hr />
+</div>
+<div id="basic-terminology" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Basic Terminology<a href="overview-of-predictive-analytics.html#basic-terminology" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong><span style="color: red;">Predictive Analytics in a nutshell.</span></strong></p>
+<p>Three main categories of predictive analytics problems:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Definition</th>
+<th align="left">Example(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Descriptive</strong></td>
+<td align="left">Focuses on what happened in the <strong><em>past</em></strong> and aims to “describe” or explain the observed patterns by identifying relationships between different variables in the data.</td>
+<td align="left">If you saw an increase in the lapse rate among the policyholders of a certain line of business, what kind of policyholders had the highest tendency to lapse?</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Predictive</strong></td>
+<td align="left">Focuses on what will happen in the <strong><em>future</em></strong> and is concerned with making accurate “predictions”.</td>
+<td align="left">For a prospective policyholder with certain characteristics, what is their predicted probability of lapse?</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Prescriptive</strong></td>
+<td align="left">Combination of <strong><em>optimization and simulation</em></strong> to quantify the impact of different “prescribed” actions in different scenarios.</td>
+<td align="left">If we reduce the premium by a certain amount, how will this affect the lapse rate?</td>
+</tr>
+</tbody>
+</table>
+<p>All predictive problems have something in common. There is always an
+output (or outcome) of interest, which can be numeric (salary, premium)
+or categorical (positive/negative, email/spam), and we have at our
+disposal a collection of input variables that may offer potentially
+useful information for predicting or understanding the output.</p>
+<p>This “input-output” setting, depicted below, is characteristic of
+predictive analytics in general, and our job is to develop a model
+teasing the (possibly complex, overlapping) contributions of the inputs
+to the output.</p>
+<p><span class="math display" id="eq:inputoutput">\[
+\begin{equation}
+\underset{\underset{Output}{\text{Target Variable}}}{Y} \overset{\text{Predict}}{\underset{\text{}}{\dashleftarrow}}\underset{\underset{Inputs}{\text{Predictors}}}{X = (X_1,...,Xp)}
+\tag{1.1}
+\end{equation}
+\]</span></p>
+<p><strong><span style="color: red;">Classification of Variables.</span></strong></p>
+<p>Predictive analytics requires data, often with a large number of
+observations and variables. In Exam PA, we will be mostly dealing with
+datasets that can be displayed in the following observation-by-variable
+rectangular array format (such data is called <strong><em>structured data</em></strong> and
+is stored in <code>R</code> in a data frame).</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="11%" />
+<col width="25%" />
+<col width="13%" />
+<col width="9%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong><em>Observation</em></strong></th>
+<th align="center">Target</th>
+<th align="center"><strong><em>Predictors</em></strong></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"><span class="math inline">\(Y\)</span></td>
+<td align="center"><span class="math inline">\(X_1\)</span></td>
+<td align="center"><span class="math inline">\(X_2\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(X_p\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(1\)</span></td>
+<td align="center"><span class="math inline">\(Y_1\)</span></td>
+<td align="center"><span class="math inline">\(X_{11}\)</span></td>
+<td align="center"><span class="math inline">\(X_{12}\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(X_{1p}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(2\)</span></td>
+<td align="center"><span class="math inline">\(Y_2\)</span></td>
+<td align="center"><span class="math inline">\(X_{21}\)</span></td>
+<td align="center"><span class="math inline">\(X_{22}\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(X_{2p}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(n\)</span></td>
+<td align="center"><span class="math inline">\(Y_n\)</span></td>
+<td align="center"><span class="math inline">\(X_{n1}\)</span></td>
+<td align="center"><span class="math inline">\(X_{n2}\)</span></td>
+<td align="center"><span class="math inline">\(...\)</span></td>
+<td align="center"><span class="math inline">\(X_{np}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>In the dataset above, the <em>observations</em> are shown across the rows of
+the array (from 1 to <span class="math inline">\(n\)</span>) and the corresponding <em>variable</em> values are
+shown in the columns. Each observation comprises measurements taken for
+multiple variables, so, for example, the first observation of the data
+consists of:</p>
+<p><span class="math display">\[
+Y_1,X_{11},X_{12},...,X_{1p},
+\]</span></p>
+<p>not just <span class="math inline">\(Y_1\)</span> or <span class="math inline">\(X_{11},X_{12},...,X_{1p}\)</span>. In the actuarial salary
+example above, you can think of each observation as an actuary you are
+able to sample, and the variables represent the characteristics of that
+actuary.</p>
+<p>Generally speaking, there are two ways to classify variables in a
+predictive analytics context: By their role in the study (intended use)
+or by their nature (characteristics).</p>
+<ul>
+<li><p><strong><span style="color: red;">By Role: Target vs. Predictors</span></strong></p>
+<p>In the dataset above, we refer to the variable that we are
+interested in as the <strong><em>target variable</em></strong>, or simply the
+<strong><em>target</em></strong> (a.k.a <strong><em>response variable</em></strong>, <strong><em>dependent
+variable</em></strong>, <em><strong>output variable</strong>, <strong>outcome variable</strong>),</em> and
+denote it by <span class="math inline">\(\bf{Y}\)</span>.</p>
+<p>Despite the target variable being our prime interest, in most
+situations we cannot change the target directly, but we have more
+direct control over some associated variables which may offer
+explanatory information about the target. These variables go by
+different names, such as <strong><em>predictors</em></strong>, <strong><em>explanatory variables,
+independent variables, input variables,</em></strong> or sometimes simply
+<strong><em>variables</em></strong> if no confusion arises, and we denote them by
+<span class="math inline">\(\bf{X_1, X_2, ..., X_p}\)</span>. In an actuarial context, predictors are
+also known as risk factors or risk drivers. In the rest of this
+manual, we will mostly use the term “predictors” and “features”.</p>
+<p>Throughout the study of predictive analytics, it is useful to think
+of a predictive model as the following functional relationship
+between the target variable <span class="math inline">\(\bf{Y}\)</span> and the corresponding set of
+<span class="math inline">\(\bf{p}\)</span> predictors <span class="math inline">\(\bf{X=(X_1,...,X_p)}\)</span> (collected as a vector):</p>
+<p><span class="math display" id="eq:modelformula">\[
+\begin{equation}
+Y_i=f\left(X_i\right)+\epsilon_i, i=1,...,n
+\tag{1.2}
+\end{equation}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li>The subscript <span class="math inline">\(i\)</span> signifies the <span class="math inline">\(i\)</span>-th observation in the
+dataset, so <span class="math inline">\(Y_i\)</span> is the value of the target variable for the
+<span class="math inline">\(i\)</span>-th observation and <span class="math inline">\(X_i = (X_{i1}, ..., X_{ip})\)</span> is the
+corresponding vector of predictor values.</li>
+<li><span class="math inline">\(f\)</span> is a fixed (non-random) but unknown function corresponding
+the predictors and the target variable.
+<ul>
+<li>Without the subscript <span class="math inline">\(i\)</span> (note that is <span class="math inline">\(f\)</span> rather than
+<span class="math inline">\(f_i\)</span>), the function applies to all observations in the
+data, and forms the “systematic” part of
+<a href="overview-of-predictive-analytics.html#eq:modelformula">(1.2)</a>.</li>
+<li>Largely synonymous with the model, this function carries the
+systematic information that the predictors offer about the
+target variable, and allows us to differentiate, or
+discriminate, the observations of the target variable on the
+basis of those predictors.</li>
+</ul></li>
+<li><span class="math inline">\(\epsilon_i\)</span> is a zero-mean random error term carrying
+information that is specific to the <span class="math inline">\(i\)</span>-th observation, hence
+“idiosyncratic” and the presence of the subscript <span class="math inline">\(i\)</span>.
+<ul>
+<li>It can be regarded as the catch-all for what the systematic
+component of the model misses, e.g., the true relationship
+between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is probably more complex than
+<a href="overview-of-predictive-analytics.html#eq:modelformula">(1.2)</a>, there are other variables associated
+with <span class="math inline">\(Y\)</span> omitted by the model.</li>
+</ul></li>
+</ul>
+<p>Although <a href="overview-of-predictive-analytics.html#eq:modelformula">(1.2)</a> looks abstract and the exam will not
+test it directly, it will provide a useful framework for thinking
+about predictive analytics. For convenience, we will refer to <span class="math inline">\(f\)</span>
+and <span class="math inline">\(\epsilon_i\)</span> respectively as the signal function and the noise,
+which are widely used terms originally stemming from engineering.</p>
+<dl>
+<dt>Goal of Predictive Analytics</dt>
+<dd>
+<p>We are interested in the signal, but the data we have is
+“contaminated” with noise.</p>
+<p>The goal of predictive analytics is to filter out the noise and
+use a variety of tools and techniques to learn as much and as
+accurately about the signal as possible from the data.</p>
+<p>The knowledge about the signal can then provide us with a basis
+for understanding the data-generating process underlying the
+population of interest and making predictions for the target
+variable.</p>
+</dd>
+</dl></li>
+<li><p><strong><span style="color: red;">By Nature: Numeric vs. Categorical</span></strong></p>
+<p>Variables can also be classified as <strong><em>numeric</em></strong> variables or
+<strong><em>categorical</em></strong> variables. Such a classification has important
+implications for developing an effective predictive model that
+aligns with the characteristics of the target variable and
+predictors to produce realistic output.</p>
+<ul>
+<li><strong>Numeric (Quantitative) Variables:</strong> Numeric values that can
+take the form of numbers with a well-defined order and an
+associated range.
+<ul>
+<li><strong>Discrete:</strong> Restricted to only certain numeric values in
+that range, e.g., non-negative numbers.</li>
+<li><strong>Continuous:</strong> Can assume any numeric value within the
+range of the variable, at least in theory.</li>
+</ul></li>
+<li><strong>Categorical (Qualitative/Factor) Variables:</strong> Takes predefined
+values in a countable collection of “categories”, also called
+the <strong><em>levels</em></strong> or <strong><em>classes</em></strong> of the variable.
+<ul>
+<li><strong>Nominal:</strong>Levels have no numeric order, i.e., we cannot
+say which category is larger or smaller.
+<ul>
+<li><strong>Examples:</strong> Smoking Status, Gender, Marital Status</li>
+</ul></li>
+<li><strong>Ordinal:</strong> Levels have a natural order.
+<ul>
+<li><strong>Examples:</strong> Health Status (Poor, Moderate, Good), Risk
+Group (Preferred, Standard, Rated, Uninsurable).</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Supervised vs. Unsupervised Problems.</strong></p>
+<p>Given the notions of target vs. predictor variables and numeric vs.
+categorical variables, we can further classify predictive analytics
+problems. Depending on the presence of a target variable and the
+objective of analysis, we can describe them as <strong><em>supervised</em></strong> or
+<strong><em>unsupervised learning</em></strong>.</p>
+<ul>
+<li><strong>Supervised Learning:</strong> Refers to those for which there is a target
+variable “supervising” or guiding the analysis, and our goal is to
+understand the relationship between the target and the predictors,
+and/or make accurate predictions for the target based on the
+predictors.
+<ul>
+<li><div>
+<div class="line-block"><strong>Models:</strong> GLMs (including linear models) and Decision Trees</div>
+</div></li>
+</ul></li>
+<li><strong>Unsupervised Learning:</strong> For unsupervised learning methods, there
+is no target variable supervising our analysis, and we are
+interested in extracting relationships and structures between
+different variables in the data.
+<ul>
+<li><div>
+<div class="line-block"><strong>Models:</strong> Principal Components Analysis (PCA) and Cluster Analysis</div>
+</div></li>
+</ul></li>
+</ul>
+<p><strong>Regression vs. Classification Problems.</strong> Finally, it is customary to
+refer to supervised learning problems with a numeric target variable as
+<strong><em>regression problems</em></strong> (an exception is logistic regression, for
+which the target variable is binary). In contrast, when the target
+variable is categorical in nature, we are dealing with <strong><em>classification
+problems</em></strong>. A predictive model for predicting a categorical target
+involves “classifying” its observations to a certain level and is aptly
+called a <em>classifier</em>.</p>
+<p>Both regression and classification problems are of importance in Exam PA
+and predictive modeling in general. The two kinds of predictive
+analytics problems have their unique features and will be covered in
+detail in Part II of this manual.</p>
+</div>
+<div id="the-model-building-process" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> The Model Building Process<a href="overview-of-predictive-analytics.html#the-model-building-process" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now that we have a first taste of what predictive analytics is like, in
+this important and rather lengthy section I will walk you through the
+main steps (the “life cycle”) involved in the construction and
+evaluation of a predictive model. In practice, model building typically
+requires a sequence of complex and inter-related decisions. The whole
+process is iterative and often more of an art than a science. The
+framework here is necessarily simplified and focuses on the most
+important steps in Exam PA, but is rich enough to show you what it takes
+to build a good model in real life.</p>
+<div id="stage-1-problem-definition" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Stage 1: Problem Definition<a href="overview-of-predictive-analytics.html#stage-1-problem-definition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first step in any model building exercise is to clearly formulate
+the business problem to which predictive analytics will be applied.</p>
+<div id="characteristics-of-predictive-modeling-problems" class="section level4 unnumbered hasAnchor">
+<h4>Characteristics of predictive modeling problems<a href="overview-of-predictive-analytics.html#characteristics-of-predictive-modeling-problems" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Before we decide to apply predictive analytics to solve a business
+problem, we should ensure that it is indeed a problem that should be
+addressed by predictive modeling. The business problem you will see on
+the exam must be one for which predictive modeling is suitable
+(otherwise, why is this exam called “Predictive Analytics!?” 😉), but a
+conceptual exam task, in an attempt to test Learning Outcome b) of Topic
+1 in Exam PA: <strong>“Describe the characteristics of predictive modeling
+problems,”</strong></p>
+<div class="rmdtip">
+<p>Many of these characteristics border on common sense, but from an exam
+point of view, it is safe to follow the wording of the PA modules and
+phrase your response in a way expected by the SOA graders.</p>
+</div>
+<div class="rmdwarn">
+<p><em>(3 points)</em> Explain two (or three) reasons why this business problem
+should be addressed by predictive modeling.</p>
+</div>
+<p>Here are some common characteristics of predictive modeling problems
+suggested in the PA modules: <em>(A typical predictive modeling problem
+will have most, but not necessarily all of these characteristics.)</em></p>
+<ul>
+<li><p><strong>(Issue)</strong> There is a clearly identified and defined business issue
+that needs to be addressed.<br />
+Predictive analytics always comes with a context. In the given
+context, what overarching goal will developing a predictive model
+help us achieve? What noble cause is it serving? There are often
+financial ends with a business impact, e.g., profit enhancement,
+cost reduction, or process efficiency, and the business issue will
+be made clear in the exam project statement.</p></li>
+<li><p><strong>(Questions)</strong> The issue can be addressed with a few well-defined
+questions.<br />
+For predictive analytics to be applicable, the broad issue has to be
+broken down into more specific questions, e.g.: <em>(This list is far
+from exhaustive.)</em></p>
+<blockquote>
+<ul>
+<li>What data do we need?</li>
+<li>What is the target or outcome?</li>
+<li>What is the success criteria, i.e., how will the model
+performance be evaluated?</li>
+</ul>
+</blockquote></li>
+<li><p><strong>(Data)</strong> Good and useful data is available for answering the
+questions above.<br />
+We can’t do predictive modeling in the vacuum without data. The
+various considerations with the use of data will be discussed in
+Stage 2 below in detail.</p></li>
+<li><p><strong>(Impact)</strong> The predictions will likely drive actions or increase
+understanding.<br />
+If predictive analytics is an appropriate approach, then the
+predictions produced by our models should lead to implementable
+changes or improve our understanding of the business issue.</p></li>
+<li><p><strong>(Better solution)</strong> Predictive analytics likely produces a
+solution better than any existing approach.</p>
+<p>If there is an easier solution to the business problem without using
+a predictive model, then perhaps predictive analytics is not
+warranted in the first place.</p></li>
+<li><p><strong>(Update)</strong> We can continue to monitor and update the models when
+new data becomes available.</p></li>
+</ul>
+</div>
+<div id="problem-definition" class="section level4 unnumbered hasAnchor">
+<h4>Problem Definition<a href="overview-of-predictive-analytics.html#problem-definition" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>After deciding to use predictive analytics to address the business issue
+of interest, we should define the problem as clearly as possible.</p>
+<p><strong>How to produce a meaningful problem definitions?</strong></p>
+<p><strong>General Strategy for Problem Definition:</strong> Get to the root cause of
+the business issue and make it specific enough to be solvable.</p>
+<ul>
+<li><p><strong>(Hypotheses)</strong> It is useful to use our prior knowledge of the
+business problem to ask questions and develop hypotheses that we can
+prove or disprove in the course of our analytic work. Doing so helps
+us gain a clearer understanding of the business issue and guide our
+efforts in a clearly defined way. With the questions and hypotheses,
+we know where to focus on.</p></li>
+<li><p><strong>(KPIs)</strong> <u><strong>Assess the outcome</strong></u> by <u><strong>selecting
+appropriate key performance indicators</strong></u>, or
+<u><strong>KPIs</strong></u> that possess the following properties:</p>
+<ul>
+<li><p><strong>(Relevance)</strong> The KPIs should align with the overall business
+objective and the interest of your client as closely as
+possible.</p></li>
+<li><p><strong>(Measurability)</strong> They should be easily measurable and provide
+an objective, quantitative basis to measure the success of the
+project.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="constraints" class="section level4 unnumbered hasAnchor">
+<h4>Constraints<a href="overview-of-predictive-analytics.html#constraints" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>As soon as we have defined the business problem clearly, it is important
+to evaluate the feasibility of solving the business problem and
+implementing the predictive analytic solution.Considerations and
+constraints when evaluating and prioritizing business problems include:</p>
+<ul>
+<li><p><strong>Availability of easily accessible and high-quality data.</strong></p></li>
+<li><p><strong>Implementation issues</strong>:</p>
+<ul>
+<li><p>Infrastructure and technology to fit complex models efficiently</p></li>
+<li><p>Timeline for completing the project</p></li>
+<li><p>Cost and effort required to maintain the selected model</p></li>
+</ul></li>
+</ul>
+<div class="rmdnote">
+<p>If a model is operationally prohibitive to execute, then it makes sense
+to trade some prediction performance for ease of implementation.</p>
+</div>
+</div>
+</div>
+<div id="stage-2-data-collection-and-validation" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Stage 2: Data Collection and Validation<a href="overview-of-predictive-analytics.html#stage-2-data-collection-and-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Predictive analytics relies on models, which are in turn constructed
+from data.</p>
+<p>After defining the business problem, a significant amount of time and
+effort is spent collecting useful data will underline the predictive
+model we are going to build.</p>
+<p>This data collection stage is more important and intricate generally
+accounted for, otherwise our analysis can result in “garbage in, garbage
+out” (e.g., low-quality data produces low-quality output).</p>
+<p><strong>Key considerations and pitfalls to avoid related to collection and use
+of data:</strong></p>
+<div id="data-design" class="section level4 unnumbered hasAnchor">
+<h4>Data Design<a href="overview-of-predictive-analytics.html#data-design" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li><strong>Relevance:</strong> Need to ensure data is <u><strong>unbiased</strong></u>
+(e.g., <u><strong>representative</strong></u> of the environment where the
+model will operate<u>)</u>
+<ul>
+<li><strong>Population:</strong> Data source should be a <u><strong>proxy</strong></u>
+of the true population of interest.
+<ul>
+<li>If the data source is not a good proxy, then taking a larger
+dataset does not help and <u><strong>repeats bias</strong></u>
+over and over again.</li>
+</ul></li>
+<li><strong>Time Frame:</strong> Time period that best reflects the business
+environment of interest.
+<ul>
+<li><u><strong>Recent history is more predictive of the near
+future</strong></u>.</li>
+</ul></li>
+</ul></li>
+<li><strong>Sampling:</strong> The process of taking subsets of observations from the
+data source to generate the dataset.
+<ul>
+<li><strong>Purpose:</strong>
+<ul>
+<li><p>The underlying population is often too big to handle, and we
+need smaller, more manageable subset to form our data.</p></li>
+<li><p>The observations sampled should closely resemble the
+business environment in which our predictive model will be
+applied in the future.</p></li>
+</ul></li>
+<li><strong>Types:</strong>
+<ul>
+<li><p><strong>Random Sampling:</strong> Randomly draw observations from the
+underlying population <u><strong>without replacement</strong></u>.
+<strong>Each record is equally likely to be selected.</strong></p></li>
+<li><p><strong>Stratified Sampling:</strong> Divide the underlying dataset into
+a # of non-overlapping “<u><strong>strata</strong></u>” in a
+<u><strong>non-random</strong></u> fashion, then
+<u><strong>randomly</strong></u> sampling a set # of observations
+from each stratum, and finally combining these observations
+to form the overall sample <span class="math inline">\(\Rightarrow\)</span> Ensures every
+stratum is properly <u><strong>represented</strong></u> in the
+collected data in proportion to its importance.</p>
+<p><strong>Ways to Define the “Strata”:</strong></p>
+<ul>
+<li><strong>W.R.T. the Target Variable:</strong> Slice the distribution
+of the target variable (numeric or categorical) into a
+# of non-overlapping regions and identify each region
+as a stratum.
+<ul>
+<li>The sampled data will properly include observations
+from the whole spectrum of the distribution of the
+target.</li>
+</ul></li>
+<li><strong>W.R.T. the Predictors:</strong> The strata can also be
+created from the predictors, usually factors.
+<ul>
+<li>If it is desired to have a sample with proportional
+observations from Predictor 1 (a 3-level factor) and
+from Predictor 2 (a 4-level factor), then we may use
+the <span class="math inline">\(3 * 4 = 12\)</span> combinations of factor levels to
+define the strata and carry out stratified sampling.</li>
+</ul></li>
+</ul>
+<p><strong>Special Cases of Stratified Sampling:</strong></p>
+<ul>
+<li><p><strong>Oversampling</strong> and <strong>Undersampling:</strong> These are
+sampling methods designed specifically for unbalanced
+data (Subsection 4.1.4)</p></li>
+<li><p><strong>Systematic Sampling:</strong> Draw observations according to
+a <u><strong>set pattern</strong></u> and there is <u><strong>no
+random mechanism</strong></u> controlling which
+observations are sampled.</p></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>Granularity:</strong> Refers to how <u><strong>precisely</strong></u> a
+variable is measured, i.e., level of <u>detail</u> for the
+information contained by the variable.
+<ul>
+<li>At the data design stage, it is a <u><strong>good idea to use a
+relatively high level of granularity</strong></u> as it is
+always possible to go from a higher level to a lower level down
+the track, but not the other way around.</li>
+</ul></li>
+</ul>
+</div>
+<div id="data-quality-issues" class="section level4 unnumbered hasAnchor">
+<h4>Data Quality Issues<a href="overview-of-predictive-analytics.html#data-quality-issues" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span style="color: red;"><strong>Data Validation:</strong></span> The process of ensuring the quality and
+appropriateness of the data available.</p>
+<ul>
+<li><p><span style="color: red;"><strong>Reasonableness:</strong></span> Data values should be reasonable (key summary
+statistics make sense) in the context of the business problem.</p></li>
+<li><p><span style="color: red;"><strong>Consistency:</strong></span> Data records should be inputted consistency on the
+same basis and rules (same units for numeric, and same coding scheme
+for categorical) so they are directly comparable.</p></li>
+<li><p><span style="color: red;"><strong>Sufficient Documentation:</strong></span> Other users can gain an accurate
+understanding of miscellaneous aspects of the data.</p>
+<ol style="list-style-type: decimal">
+<li>Overall description of data, including data source and when it
+was collected</li>
+<li>Data Dictionary (name, definition, format of each variable)</li>
+<li>Notes about past updates or irregularities</li>
+<li>Statement about accountability for correctness of data</li>
+<li>Description of the governance process used to manage the data</li>
+<li>Proxy variables – Variables that are not prohibited variables
+themselves, but are closely related to prohibited variables.
+<ul>
+<li>Occupation (Proxy of Gender/Income)</li>
+<li>Geographical Location (Proxy of Age/Income)</li>
+</ul></li>
+</ol></li>
+</ul>
+</div>
+<div id="other-data-issues" class="section level4 unnumbered hasAnchor">
+<h4>Other Data Issues<a href="overview-of-predictive-analytics.html#other-data-issues" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="structured-vs.-unstructured-data" class="section level5 hasAnchor" number="1.2.2.0.1">
+<h5><span class="header-section-number">1.2.2.0.1</span> Structured vs. Unstructured Data<a href="overview-of-predictive-analytics.html#structured-vs.-unstructured-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<table>
+<caption><span id="tab:unnamed-chunk-11">TABLE 1.1: </span>Structured vs. Unstructured Data</caption>
+<thead>
+<tr class="header">
+<th align="left">Category</th>
+<th align="left">Structured.Data</th>
+<th align="left">Unstructured.Data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Definition</td>
+<td align="left">Data that fit into a tabular arrangement</td>
+<td align="left">Data that do not, e.g., text, image, audio</td>
+</tr>
+<tr class="even">
+<td align="left">Pros</td>
+<td align="left">Easier to manipulate</td>
+<td align="left">More flexible</td>
+</tr>
+<tr class="odd">
+<td align="left">Cons</td>
+<td align="left">Cannot represent information that does not naturally fit into a tabular arrangement</td>
+<td align="left">Harder to access and has to be carefully pre-processed</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="bias-variance-trade-off" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Bias-Variance Trade-off<a href="overview-of-predictive-analytics.html#bias-variance-trade-off" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="feature-generation-and-selection" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Feature Generation and Selection<a href="overview-of-predictive-analytics.html#feature-generation-and-selection" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="conceptual-review-questions-for-chapter-1" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Conceptual Review Questions for Chapter 1<a href="overview-of-predictive-analytics.html#conceptual-review-questions-for-chapter-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/jeffamaxey/r-predictive-analytics/edit/master/01-Predictive-Analytics-Overview.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": "https://github.com/jeffamaxey/r-predictive-analytics/blob/master/01-Predictive-Analytics-Overview.Rmd",
+    "text": null
+  },
+  "download": ["bookdownproj.pdf", "bookdownproj.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection",
+    "levels": 4,
+    "scroll_highlight": true
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

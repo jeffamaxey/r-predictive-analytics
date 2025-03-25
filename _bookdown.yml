@@ -1,8 +1,30 @@
 book_filename: "bookdownproj"
+repo: https://github.com/jeffamaxey/predictive-analytics/
 output_dir: docs
 delete_merged_file: true
-edit: https://github.com/jxareas/RapidBook/edit/master/%s
-view: https://github.com/jxareas/RapidBook/blob/master/%s
+edit: https://github.com/jeffamaxey/r-predictive-analytics/edit/master/%s
+view: https://github.com/jeffamaxey/r-predictive-analytics/blob/master/%s
 language:
+  label:
+    fig: "FIGURE "
+    tab: "TABLE "
+    eq: "EQUATION "
   ui:
+    edit: "Edit"
     chapter_name: "Chapter "
+rmd_files: [
+  "index.Rmd",
+  "01-Predictive-Analytics-Overview.Rmd"
+  # "02-Data-Exploration-Visualization.Rmd",
+  # "03-Distribution-Theory.Rmd",
+  # "04-Poisson-Regression.Rmd",
+  # "05-Generalized-Linear-Models.Rmd",
+  # "06-Logistic-Regression.Rmd",
+  # "07-Correlated-Data.Rmd",
+  # "08-Introduction-to-Multilevel-Models.Rmd",
+  # "09-Two-Level-Longitudinal-Data.Rmd",
+  # "10-Multilevel-Data-With-More-Than-Two-Levels.Rmd",
+  # "11-Generalized-Linear-Multilevel-Models.Rmd",
+  # "99-References.Rmd"
+]
+clean: [packages.bib, bookdown.bbl]

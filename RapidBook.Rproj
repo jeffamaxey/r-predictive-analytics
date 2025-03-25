@@ -1,4 +1,5 @@
 Version: 1.0
+ProjectId: 43db2872-9d19-40c2-aea6-24be478f167a
 
 RestoreWorkspace: Default
 SaveWorkspace: Default
@@ -12,8 +13,10 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
+AutoAppendNewline: Yes
+StripTrailingWhitespace: Yes
+
 BuildType: Website
 
-PythonType: conda
-PythonVersion: 3.10.4
-PythonPath: C:/Users/JonAreas/miniconda3/envs/r-reticulate/python.exe
+MarkdownWrap: Column
+MarkdownWrapAtColumn: 72

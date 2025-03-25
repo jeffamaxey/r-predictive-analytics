@@ -1,0 +1,974 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  12pt,
+]{krantz}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.33,0.33,0.33}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.06,0.06,0.06}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.5,0.5,0.5}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.06,0.06,0.06}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.14,0.14,0.14}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.06,0.06,0.06}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.43,0.43,0.43}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.43,0.43,0.43}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.5,0.5,0.5}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.5,0.5,0.5}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0,0,0}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.5,0.5,0.5}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage[bf,singlelinecheck=off]{caption}
+
+\usepackage{Alegreya}
+\usepackage[scale=.7]{sourcecodepro}
+
+\usepackage{framed,color}
+\definecolor{shadecolor}{RGB}{248,248,248}
+
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\renewenvironment{quote}{\begin{VF}}{\end{VF}}
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+
+\ifxetex
+  \usepackage{letltxmacro}
+  \setlength{\XeTeXLinkMargin}{1pt}
+  \LetLtxMacro\SavedIncludeGraphics\includegraphics
+  \def\includegraphics#1#{% #1 catches optional stuff (star/opt. arg.)
+    \IncludeGraphicsAux{#1}%
+  }%
+  \newcommand*{\IncludeGraphicsAux}[2]{%
+    \XeTeXLinkBox{%
+      \SavedIncludeGraphics#1{#2}%
+    }%
+  }%
+\fi
+
+\makeatletter
+\newenvironment{kframe}{%
+\medskip{}
+\setlength{\fboxsep}{.8em}
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\makeatletter
+\@ifundefined{Shaded}{
+}{\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}}
+\makeatother
+
+\newenvironment{rmdblock}[1]
+  {
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{assets/images/#1}}
+    }
+  }
+  \setlength{\fboxsep}{1em}
+  \begin{kframe}
+  \item
+  }
+  {
+  \end{kframe}
+  \end{itemize}
+  }
+\newenvironment{rmdnote}
+  {\begin{rmdblock}{note}}
+  {\end{rmdblock}}
+\newenvironment{rmdcaution}
+  {\begin{rmdblock}{caution}}
+  {\end{rmdblock}}
+\newenvironment{rmdimportant}
+  {\begin{rmdblock}{important}}
+  {\end{rmdblock}}
+\newenvironment{rmdtip}
+  {\begin{rmdblock}{tip}}
+  {\end{rmdblock}}
+\newenvironment{rmdwarning}
+  {\begin{rmdblock}{warning}}
+  {\end{rmdblock}}
+
+\usepackage{makeidx}
+\makeindex
+
+\urlstyle{tt}
+
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\frontmatter
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Predictive Analytics},
+  pdfauthor={Jeff Maxey},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Predictive Analytics}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Theory of and Use Cases in Predictive Analytics Using R}
+\author{Jeff Maxey}
+\date{March 18, 2025}
+
+\begin{document}
+\maketitle
+
+\cleardoublepage\newpage\thispagestyle{empty}\null
+\cleardoublepage\newpage\thispagestyle{empty}\null
+%\cleardoublepage\newpage
+\thispagestyle{empty}
+\begin{large}
+To the most amazing cooks in my life, Xie Shaobai and Si Zhinan.
+\begin{flushright}
+---Yihui
+\end{flushright}
+
+\bigskip
+
+To my supporting wife, Caroline, and our lovely newborn, Axel.
+\begin{flushright}
+---Christophe
+\end{flushright}
+
+\bigskip
+
+To my mom, who taught me the joy of life-long learning.
+\begin{flushright}
+---Emily
+\end{flushright}
+\end{large}
+
+\setlength{\abovedisplayskip}{-5pt}
+\setlength{\abovedisplayshortskip}{-5pt}
+
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\StringTok{"\_common.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.4     v tidyr     1.3.1
+## v purrr     1.0.4     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter()     masks stats::filter()
+## x dplyr::group_rows() masks kableExtra::group_rows()
+## x dplyr::lag()        masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\chapter*{Preface}\label{preface}
+
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\part{Introduction to Predictive Analytics}\label{part-introduction-to-predictive-analytics}
+
+\chapter{Overview of Predictive Analytics}\label{overview-of-predictive-analytics}
+
+\section*{Introduction}\label{introduction}
+
+
+This foundational chapter streamlines the material scattered in different parts
+of the PA e-learning modules and provides a broad and coherent introduction to
+predictive analytics.
+
+Setting the scene for pretty much everything that comes later, it walks you
+through the main steps in building a predictive model and presents the
+fundamental concepts in predictive analytics that you will see repeatedly in the
+rest of this manual.
+
+These concepts are universally applicable in the sense that they apply to
+essentially all types of predictive model, and will be illustrated in the
+context of specific types of model (GLMs and decision trees, in particular) in
+later chapters.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Basic Terminology}\label{basic-terminology}
+
+\textbf{Predictive Analytics in a nutshell.} Three main categories of predictive
+analytics problems:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3291}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3291}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3291}}@{}}
+\caption{\textbf{TABLE 1:} Categories of Predictive Analytics Problems}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Type
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example(s)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Type
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example(s)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Descriptive} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  Focuses on what
+  happened in the
+  \textbf{\emph{past}} and aims
+  to ``describe'' or
+  explain the
+  observed patterns
+  by identifying
+  relationships
+  between different
+  variables in the
+  data.
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  If you saw an
+  increase in the
+  lapse rate among
+  the policyholders
+  of a certain line
+  of business, what
+  kind of
+  policyholders had
+  the highest
+  tendency to lapse?
+\item
+  What are their key
+  characteristics?
+  This is a question
+  addressed by
+  descriptive
+  analytics.
+\end{itemize}
+\end{minipage} \\
+\textbf{Predictive} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  Focuses on what
+  will happen in
+\end{itemize}
+
+the~\textbf{\emph{future}}~and
+is concerned with
+making accurate
+``predictions''.
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  For a prospective
+  policyholder with
+  certain
+  characteristics,
+  what is their
+  predicted
+  probability of
+  lapse?
+\item
+  The ability to make
+  such a prediction
+  will be useful for
+  identifying future
+  policyholders who
+  will have a lower
+  probability of
+  lapse and
+  contribute to the
+  profitability of an
+  insurer.
+\end{itemize}
+\end{minipage} \\
+\textbf{Prescriptive} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  Combination of
+  \textbf{\emph{optimization and
+  simulation}} to
+  quantify the impact
+  of different
+  ``prescribed''
+  actions in
+  different
+  scenarios.
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  If we reduce the
+  premium by a
+  certain amount, how
+  will this affect
+  the lapse rate?
+\item
+  More generally,
+  what is the best
+  course of action to
+  reduce the lapse
+  rate? Prescriptive
+  analytics may give
+  us some useful
+  insight.
+\end{itemize}
+\end{minipage} \\
+\end{longtable}
+
+All predictive problems have something in common. There is always an output (or
+outcome) of interest, which can be numeric (salary, premium) or categorical
+(positive/negative, email/spam), and we have at our disposal a collection of
+input variables that may offer potentially useful information for predicting or
+understanding the output.
+
+This ``input-output'' setting, depicted below, is characteristic of predictive
+analytics in general, and our job is to develop a model teasing the (possibly
+complex, overlapping) contributions of the inputs to the output.
+
+\[\begin{equation}
+\underset{\underset{Output}{\text{Target Variable}}}{Y} \overset{\text{Predict}}{\underset{\text{}}{\dashleftarrow}}\underset{\underset{Inputs}{\text{Predictors}}}{X = (X_1,...,Xp)}
+\label{eq:inputoutput}
+\end{equation}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Classification of Variables.} Predictive analytics requires data, often with
+a large number of observations and variables. In Exam PA, we will be mostly
+dealing with datasets that can be displayed in the following
+observation-by-variable rectangular array format (such data is called
+\textbf{\emph{structured data}} and is stored in \texttt{R} in a data frame).
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1579}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1579}}@{}}
+\caption{\textbf{TABLE 1:} Structured Data Format}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\textbf{\emph{Obse
+r
+vation}}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Target***
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{\emph{Pre
+d
+ictors}}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\textbf{\emph{Obse
+r
+vation}}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Target***
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{\emph{Pre
+d
+ictors}}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \(Y\) & \(X_1\) & \(X_2\) & \(...\) & \(X_p\) \\
+\(1\) & \(Y_1\) & \(X_{11}\) & \(X_{12}\) & \(...\) & \(X_{1p}\) \\
+\(2\) & \(Y_2\) & \(X_{21}\) & \(X_{22}\) & \(...\) & \(X_{2p}\) \\
+\(...\) & \(...\) & \(...\) & \(...\) & \(...\) & \(...\) \\
+\(n\) & \(Y_n\) & \(X_{n1}\) & \(X_{n2}\) & \(...\) & \(X_{np}\) \\
+\end{longtable}
+
+In the dataset above, the \emph{observations} are shown across the rows of the array
+(from 1 to \(n\)) and the corresponding \emph{variable} values are shown in the
+columns. Each observation comprises measurements taken for multiple variables,
+so, for example, the first observation of the data consists of:
+
+\[
+Y_1,X_{11},X_{12},...,X_{1p},
+\]
+
+not just \(Y_1\) or \(X_{11},X_{12},...,X_{1p}\). In the actuarial salary example
+above, you can think of each observation as an actuary you are able to sample,
+and the variables represent the characteristics of that actuary.
+
+Generally speaking, there are two ways to classify variables in a predictive
+analytics context: By their role in the study (intended use) or by their nature
+(characteristics).
+
+\begin{itemize}
+\item
+  \textbf{By Role: Target vs.~Predictors}
+
+  In the dataset above, we refer to the variable that we are interested in as
+  the \textbf{\emph{target variable}}, or simply the \textbf{\emph{target}} (a.k.a \textbf{\emph{response
+  variable}}, \textbf{\emph{dependent variable}}, \emph{\textbf{output variable}, \textbf{outcome
+  variable}),} and denote it by \(\bf{Y}\).
+
+  Despite the target variable being our prime interest, in most situations we
+  cannot change the target directly, but we have more direct control over some
+  associated variables which may offer explanatory information about the
+  target. These variables go by different names, such as \textbf{\emph{predictors}},
+  \textbf{\emph{explanatory variables, independent variables, input variables,}} or
+  sometimes simply \textbf{\emph{variables}} if no confusion arises, and we denote them
+  by \(\bf{X_1, X_2, ..., X_p}\). In an actuarial context, predictors are also
+  known as risk factors or risk drivers. In the rest of this manual, we will
+  mostly use the term ``predictors'' and ``features''.
+
+  Throughout the study of predictive analytics, it is useful to think of a
+  predictive model as the following functional relationship between the target
+  variable \(\bf{Y}\) and the corresponding set of \(\bf{p}\) predictors
+  \(\bf{X=(X_1,...,X_p)}\) (collected as a vector):
+
+  \[
+  \begin{equation}
+  Y_i=f\left(X_i\right)+\epsilon_i, i=1,...,n
+  \label{eq:modelformula}
+  \end{equation}
+  \]
+
+  where:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The subscript \(i\) signifies the \(i\)-th observation in the dataset, so
+    \(Y_i\) is the value of the target variable for the \(i\)-th observation and
+    \(X_i = (X_{i1}, ..., X_{ip})\) is the corresponding vector of predictor
+    values.
+  \item
+    \(f\) is a fixed (non-random) but unknown function corresponding the
+    predictors and the target variable.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Without the subscript \(i\) (note that is \(f\) rather than \(f_i\)), the
+      function applies to all observations in the data, and forms the
+      ``systematic'' part of \eqref{eq:modelformula}.
+    \item
+      Largely synonymous with the model, this function carries the
+      systematic information that the predictors offer about the target
+      variable, and allows us to differentiate, or discriminate, the
+      observations of the target variable on the basis of those
+      predictors.
+    \end{itemize}
+  \item
+    \(\epsilon_i\) is a zero-mean random error term carrying information that
+    is specific to the \(i\)-th observation, hence ``idiosyncratic'' and the
+    presence of the subscript \(i\).
+
+    \begin{itemize}
+    \tightlist
+    \item
+      It can be regarded as the catch-all for what the systematic
+      component of the model misses, e.g., the true relationship between
+      \(X\) and \(Y\) is probably more complex than \eqref{eq:modelformula},
+      there are other variables associated with \(Y\) omitted by the model.
+    \end{itemize}
+  \end{itemize}
+
+  Although \eqref{eq:modelformula} looks abstract and the exam will not test it
+  directly, it will provide a useful framework for thinking about predictive
+  analytics. For convenience, we will refer to \(f\) and \(\epsilon_i\)
+  respectively as the signal function and the noise, which are widely used
+  terms originally stemming from engineering.
+
+  \begin{description}
+  \item[Goal of Predictive Analytics]
+  We are interested in the signal, but the data we have is ``contaminated''
+  with noise.
+
+  The goal of predictive analytics is to filter out the noise and use a
+  variety of tools and techniques to learn as much and as accurately about
+  the signal as possible from the data.
+
+  The knowledge about the signal can then provide us with a basis for
+  understanding the data-generating process underlying the population of
+  interest and making predictions for the target variable.
+  \end{description}
+\item
+  \textbf{By Nature: Numeric vs.~Categorical}
+
+  Variables can also be classified as \textbf{\emph{numeric}} variables or
+  \textbf{\emph{categorical}} variables. Such a classification has important
+  implications for developing an effective predictive model that aligns with
+  the characteristics of the target variable and predictors to produce
+  realistic output.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Numeric (Quantitative) Variables:} Numeric values that can take the
+    form of numbers with a well-defined order and an associated range.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Discrete:} Restricted to only certain numeric values in that
+      range, e.g., non-negative numbers.
+    \item
+      \textbf{Continuous:} Can assume any numeric value within the range of the
+      variable, at least in theory.
+    \end{itemize}
+  \item
+    \textbf{Categorical (Qualitative/Factor) Variables:} Takes predefined values
+    in a countable collection of ``categories'', also called the \textbf{\emph{levels}}
+    or \textbf{\emph{classes}} of the variable.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Nominal:}Levels have no numeric order, i.e., we cannot say which
+      category is larger or smaller.
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \textbf{Examples:} Smoking Status, Gender, Marital Status
+      \end{itemize}
+    \item
+      \textbf{Ordinal:} Levels have a natural order.
+
+      \begin{itemize}
+      \tightlist
+      \item
+        \textbf{Examples:} Health Status (Poor, Moderate, Good), Risk Group
+        (Preferred, Standard, Rated, Uninsurable).
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Supervised vs.~Unsupervised Problems.} Given the notions of target vs.
+predictor variables and numeric vs.~categorical variables, we can further
+classify predictive analytics problems. Depending on the presence of a target
+variable and the objective of analysis, we can describe them as \textbf{\emph{supervised}}
+or \textbf{\emph{unsupervised learning}}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Supervised Learning:} Refers to those for which there is a target
+  variable ``supervising'' or guiding the analysis, and our goal is to
+  understand the relationship between the target and the predictors, and/or
+  make accurate predictions for the target based on the predictors.
+
+  \begin{itemize}
+  \item
+    \textbf{Models:} GLMs (including linear models) and Decision Trees
+  \end{itemize}
+\item
+  \textbf{Unsupervised Learning:} For unsupervised learning methods, there is no
+  target variable supervising our analysis, and we are interested in
+  extracting relationships and structures between different variables in the
+  data.
+
+  \begin{itemize}
+  \item
+    \textbf{Models:} Principal Components Analysis (PCA) and Cluster Analysis
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Regression vs.~Classification Problems.} Finally, it is customary to refer to
+supervised learning problems with a numeric target variable as \textbf{\emph{regression
+problems}} (an exception is logistic regression, for which the target variable
+is binary). In contrast, when the target variable is categorical in nature, we
+are dealing with \textbf{\emph{classification problems}}. A predictive model for
+predicting a categorical target involves ``classifying'' its observations to a
+certain level and is aptly called a \emph{classifier}.
+
+Both regression and classification problems are of importance in Exam PA and
+predictive modeling in general. The two kinds of predictive analytics problems
+have their unique features and will be covered in detail in Part II of this
+manual.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{The Model Building Process}\label{the-model-building-process}
+
+Now that we have a first taste of what predictive analytics is like, in this
+important and rather lengthy section I will walk you through the main steps (the
+``life cycle'') involved in the construction and evaluation of a predictive model.
+In practice, model building typically requires a sequence of complex and
+inter-related decisions. The whole process is iterative and often more of an art
+than a science. The framework here is necessarily simplified and focuses on the
+most important steps in Exam PA, but is rich enough to show you what it takes to
+build a good model in real life.
+
+\subsection*{⚠ EXAM NOTE ⚠}\label{exam-note}
+
+
+This section, for the most part, is conceptual and descriptive. There is not
+much mathematics and you may be tempted to skip this section under the
+impression that it won't be on the exam. To your dismay, \textbf{it can be tested,
+sometimes heavily!} In recent years, there have been more exam tasks testing
+the conceptual aspects of predictive modeling, such as the considerations that
+go into collecting a good set of data and the pros and cons of treating a
+variable in a certain way, and there will only be \textbf{more and more such tasks in
+the new exam format}. Do read this section in some detail and try your best to
+understand why we do ``this and that!''
+
+\subsection{Stage 1: Problem Definition}\label{stage-1-problem-definition}
+
+The first step in any model building exercise is to clearly formulate the
+business problem to which predictive analytics will be applied.
+
+\subsubsection{Characteristics of predictive modeling problems}\label{characteristics-of-predictive-modeling-problems}
+
+Before we decide to apply predictive analytics to solve a business problem, we
+should ensure that it is indeed a problem that should be addressed by predictive
+modeling. The business problem you will see on the exam must be one for which
+predictive modeling is suitable (otherwise, why is this exam called ``Predictive
+Analytics!?'' 😉), but a conceptual exam task, in an attempt to test Learning
+Outcome b) of Topic 1 in Exam PA:
+
+\textbf{``Describe the characteristics of predictive modeling problems,''}
+
+may ask you to:
+
+\subsection*{⚠ POTENTIAL EXAM NOTE}\label{potential-exam-note}
+
+
+\emph{(3 points)} Explain two (or three) reasons why this business problem should be
+addressed by predictive modeling.
+
+Here are some common characteristics of predictive modeling problems suggested
+in the PA modules: \emph{(A typical predictive modeling problem will have most, but
+not necessarily all of these characteristics.)}
+
+\subsection*{⚠ EXAM NOTE ⚠}\label{exam-note-1}
+
+
+Many of these characteristics border on common sense, but from an exam point of
+view, it is safe to follow the wording of the PA modules and phrase your
+response in a way expected by the SOA graders.
+
+\begin{itemize}
+\item
+  \textbf{(Issue)} There is a clearly identified and defined business issue that
+  needs to be addressed.\\
+  Predictive analytics always comes with a context. In the given context, what
+  overarching goal will developing a predictive model help us achieve? What
+  noble cause is it serving? There are often financial ends with a business
+  impact, e.g., profit enhancement, cost reduction, or process efficiency, and
+  the business issue will be made clear in the exam project statement.
+\item
+  \textbf{(Questions)} The issue can be addressed with a few well-defined
+  questions.\\
+  For predictive analytics to be applicable, the broad issue has to be broken
+  down into more specific questions, e.g.: \emph{(This list is far from
+  exhaustive.)}
+
+  \begin{quote}
+  \begin{itemize}
+  \tightlist
+  \item
+    What data do we need?
+  \item
+    What is the target or outcome?
+  \item
+    What is the success criteria, i.e., how will the model performance be
+    evaluated?
+  \end{itemize}
+  \end{quote}
+\item
+  \textbf{(Data)} Good and useful data is available for answering the questions
+  above.\\
+  We can't do predictive modeling in the vacuum without data. The various
+  considerations with the use of data will be discussed in Stage 2 below in
+  detail.
+\item
+  \textbf{(Impact)} The predictions will likely drive actions or increase
+  understanding.\\
+  If predictive analytics is an appropriate approach, then the predictions
+  produced by our models should lead to implementable changes or improve our
+  understanding of the business issue.
+\item
+  \textbf{(Better solution)} Predictive analytics likely produces a solution better
+  than any existing approach.\\
+  If there is an easier solution to the business problem without using a
+  predictive model, then perhaps predictive analytics is not warranted in the
+  first place.
+\item
+  \textbf{(Update)} We can continue to monitor and update the models when new data
+  becomes available.
+\end{itemize}
+
+\subsection{Problem Definition}\label{problem-definition}
+
+After deciding to use predictive analytics to address the business issue of
+interest, we should define the problem as clearly as possible. It is important
+to get to the root cause of the business issue and make it specific enough to be
+solvable. The following strategies suggested by the PA modules can help us come
+up with a meaningful problem definition and give our project a higher chance of
+success:
+
+\begin{itemize}
+\item
+  \textbf{(Hypotheses)} It is useful to use our prior knowledge of the business
+  problem to ask questions and develop hypotheses that we can prove or
+  disprove in the course of our analytic work. Doing so helps us gain a
+  clearer understanding of the business issue and guide our efforts in a
+  clearly defined way. With the questions and hypotheses, we know where to
+  focus on.
+
+  In the actuarial salary example introduced in Section 1.1, it is perfectly
+  reasonable to hypothesize that the more exams passed, the higher the salary,
+  and pay attention to how positive that relationship is. If, to your
+  astonishment, your model is saying that salary tends to decrease with the
+  number of exams passed \emph{(how could that be!? 😉)}, then almost surely there
+  is something wrong with your work, e.g., some data entries are erroneous.
+\item
+  \textbf{(KPIs)} We also need ways to assess the outcome by selecting appropriate
+  key performance indicators, or KPIs. Ideally, the KPIs should possess the
+  following properties:
+
+  \begin{quote}
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{(Relevance)} The KPIs should align with the overall business
+    objective and the interest of your client as closely as possible.
+  \item
+    \textbf{(Measurability)} They should be easily measurable and provide an
+    objective, quantitative basis to measure the success of the project,
+    i.e., what key numbers will change in the future as a result of your
+    predictive analytic work. Often, the KPIs are defined in terms of
+    certain financial variables 💲, e.g., number of customers, profit
+    margin \emph{(money talks!).}
+  \end{itemize}
+  \end{quote}
+
+  In the actuarial salary example above, an appropriate KPI is the number of
+  new actuaries recruited as a result of a better understanding of the drivers
+  of salary.
+\end{itemize}
+
+\section{Constraints}\label{constraints}
+
+As soon as we have defined the business problem clearly, it is important to
+evaluate the feasibility of solving the business problem and implementing the
+predictive analytic solution. We want to make sure that the solutions we produce
+will work. Some considerations and constraints we should keep in mind when
+evaluating and prioritizing business problems include: \emph{(These items, taken from
+the PA modules, are by no means exhaustive.)}
+
+\begin{itemize}
+\item
+  The availability of easily accessible and high-quality data \emph{(more on data
+  in Stage 2)}
+\item
+  Implementation issues such as the presence of the necessary IT
+  infrastructure and technology to fit complex models efficiently, the
+  timeline for completing the project, and the cost and effort required to
+  maintain the selected model.
+
+  Do we have the resources to implement complex models without freezing or
+  crashing? If a model is operationally prohibitive to execute, then it makes
+  sense to trade some prediction performance for ease of implementation. After
+  all, if we cannot implement and apply the model in practice, then it is
+  essentially useless.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Bias-Variance Trade-off}\label{bias-variance-trade-off}
+
+\section{Feature Generation and Selection}\label{feature-generation-and-selection}
+
+\section{Conceptual Review Questions for Chapter 1}\label{conceptual-review-questions-for-chapter-1}
+
+  \bibliography{book.bib,packages.bib}
+
+\backmatter
+\printindex
+
+\end{document}

@@ -62,13 +62,17 @@ summary(linear_reg)
 We can also plot the linear regression line using `ggplot2`:
 
 ```{r}
-ggplot(data = df,
-       mapping = aes(x = lstat,
-                     y = medv, 
-                     col = medv)) +
+ggplot(
+  data = df,
+  mapping = aes(
+    x = lstat,
+    y = medv,
+    col = medv
+  )
+) +
   geom_point() +
-  geom_smooth(method=lm, formula = y ~ x, col="red") +
-  guides(col="none")
+  geom_smooth(method = lm, formula = y ~ x, col = "red") +
+  guides(col = "none")
 ```
 
 ## Polynomial Regression
@@ -76,9 +80,8 @@ ggplot(data = df,
 It is also possible to fit a polynomial regression model by using the `poly` function, whose first argument is the variable and the second is the degree of the polynomial.
 
 ```{r}
-polynomial_reg <- lm(formula=medv~poly(lstat, 2), data=df)
+polynomial_reg <- lm(formula = medv ~ poly(lstat, 2), data = df)
 polynomial_reg
-
 ```
 
 It is also possible to print the summary of the model, by using the aforementioned `summary` function.
@@ -90,13 +93,17 @@ summary(polynomial_reg)
 Similarly, we can plot this polynomial regression model using `ggplot2`:
 
 ```{r}
-ggplot(data = df,
-       mapping = aes(x = lstat,
-                     y = medv, 
-                     col = medv)) +
-  geom_point(col="red") +
-  geom_smooth(method=lm, formula = y ~ poly(x, 2), col="green") +
-  guides(col="none")
+ggplot(
+  data = df,
+  mapping = aes(
+    x = lstat,
+    y = medv,
+    col = medv
+  )
+) +
+  geom_point(col = "red") +
+  geom_smooth(method = lm, formula = y ~ poly(x, 2), col = "green") +
+  guides(col = "none")
 ```
 
 ## Multiple Linear Regression

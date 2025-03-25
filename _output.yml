@@ -1,27 +1,63 @@
-bookdown::bs4_book:
+# bookdown::bs4_book:
+#   split_by: chapter
+#   repo:
+#     base: https://github.com/jeffamaxey/r-predictive-analytics
+#     branch: master
+#   theme:
+#     primary: "#4E11A8"
+#     base_font:
+#       google: Lato
+#     heading_font:
+#       google:
+#         family: Poppins
+#     code_font:
+#       google:
+#         # arguments to sass::font_google()
+#         family: DM Mono
+#         local: false
+#   config:
+#     collapse: subsection
+#     scroll_highlight: true
+#     toc:
+#       before: |
+#         <li><a href="./">Predictive Analytics</a></li>
+#       after: |
+#         <li><a href="https://github.com/jeffamaxey/r-predictive-analytics" target="blank">GitHub Homepage</a></li>
+#     sharing:
+#       github: true
+#       facebook: no
+#       twitter: no
+#     download: [pdf, epub, mobi]
+#     search:
+#       engine: fuse
+# bookdown::pdf_book:
+#   includes:
+#     in_header: latex/preamble.tex
+#     before_body: latex/before_body.tex
+#     after_body: latex/after_body.tex
+#   keep_tex: true
+#   dev: "cairo_pdf"
+#   latex_engine: xelatex
+#   citation_package: natbib
+#   template: null
+#   pandoc_args: --top-level-division=chapter
+#   toc_depth: 3
+#   toc_unnumbered: false
+#   toc_appendix: true
+#   quote_footer: ["\\VA{", "}{}"]
+#   highlight_bw: true
+# bookdown::epub_book:
+#   stylesheet: css/style.css
+bookdown::gitbook:
+  css: css/style.css
   split_by: chapter
-  repo: 
-    base: https://github.com/jxareas/bookdown-template
-    branch: master
-  theme:
-    primary: "#4E11A8"   
-    base_font: 
-      google: Lato
-    heading_font:
-      google:
-        family: Poppins
-    code_font:
-      google: 
-        # arguments to sass::font_google() 
-        family: DM Mono
-        local: false
+  pandoc_args: ["--lua-filter=color-text.lua"]
   config:
-    collapse: section
     toc:
+      levels: 4
+      collapse: subsection
+      scroll_highlight: true
       before: |
-        <li><a href="./">Template</a></li>
+        <li><a href="./">Predictive Analytics</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-        sharing:
-      facebook: true
-      twitter: true
+        <li><a href="https://github.com/jeffamaxey/r-predictive-analytics" target="blank">GitHub Homepage</a></li>

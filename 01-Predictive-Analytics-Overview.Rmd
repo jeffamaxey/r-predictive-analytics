@@ -1,0 +1,591 @@
+---
+output: 
+  html_document:
+    pandoc_args: ["--lua-filter=color-text.lua"]
+  pdf_document: 
+    pandoc_args: ["--lua-filter=color-text.lua"]
+    keep_tex: true
+---
+
+```{r include = TRUE}
+source("_common.R")
+```
+
+```{cat, engine.opts = list(file = "color-text.lua")}
+Span = function(el)
+  color = el.attributes['color']
+  -- if no color attribute, return unchange
+  if color == nil then return el end
+  
+  -- transform to <span style="color: red;"></span>
+  if FORMAT:match 'html' then
+    -- remove color attributes
+    el.attributes['color'] = nil
+    -- use style attribute instead
+    el.attributes['style'] = 'color: ' .. color .. ';'
+    -- return full span element
+    return el
+  elseif FORMAT:match 'latex' then
+    -- remove color attributes
+    el.attributes['color'] = nil
+    -- encapsulate in latex code
+    table.insert(
+      el.content, 1,
+      pandoc.RawInline('latex', '\\textcolor{'..color..'}{')
+    )
+    table.insert(
+      el.content,
+      pandoc.RawInline('latex', '}')
+    )
+    -- returns only span content
+    return el.content
+  else
+    -- for other format return unchanged
+    return el
+  end
+end
+```
+
+# (PART) Introduction to Predictive Analytics {#part-introduction-to-predictive-analytics .unnumbered}
+
+# Overview of Predictive Analytics {#overview-of-predictive-analytics}
+
+## Introduction {.unnumbered}
+
+This foundational chapter streamlines the material scattered in
+different parts of the PA e-learning modules and provides a broad and
+coherent introduction to predictive analytics.
+
+Setting the scene for pretty much everything that comes later, it walks
+you through the main steps in building a predictive model and presents
+the fundamental concepts in predictive analytics that you will see
+repeatedly in the rest of this manual.
+
+These concepts are universally applicable in the sense that they apply
+to essentially all types of predictive model, and will be illustrated in
+the context of specific types of model (GLMs and decision trees, in
+particular) in later chapters.
+
+------------------------------------------------------------------------
+
+## Basic Terminology {#basic-terminology}
+
+**`r colorize("Predictive Analytics in a nutshell.", "red")`**
+
+Three main categories of predictive analytics problems:
+
+| Type | Definition | Example(s) |
+|:-----------------------|:-----------------------|:-----------------------|
+| **Descriptive** | Focuses on what happened in the ***past*** and aims to “describe” or explain the observed patterns by identifying relationships between different variables in the data. | If you saw an increase in the lapse rate among the policyholders of a certain line of business, what kind of policyholders had the highest tendency to lapse? |
+| **Predictive** | Focuses on what will happen in the ***future*** and is concerned with making accurate “predictions”. | For a prospective policyholder with certain characteristics, what is their predicted probability of lapse? |
+| **Prescriptive** | Combination of ***optimization and simulation*** to quantify the impact of different “prescribed” actions in different scenarios. | If we reduce the premium by a certain amount, how will this affect the lapse rate? |
+
+All predictive problems have something in common. There is always an
+output (or outcome) of interest, which can be numeric (salary, premium)
+or categorical (positive/negative, email/spam), and we have at our
+disposal a collection of input variables that may offer potentially
+useful information for predicting or understanding the output.
+
+This "input-output" setting, depicted below, is characteristic of
+predictive analytics in general, and our job is to develop a model
+teasing the (possibly complex, overlapping) contributions of the inputs
+to the output.
+
+$$
+\begin{equation}
+\underset{\underset{Output}{\text{Target Variable}}}{Y} \overset{\text{Predict}}{\underset{\text{}}{\dashleftarrow}}\underset{\underset{Inputs}{\text{Predictors}}}{X = (X_1,...,Xp)}
+(\#eq:inputoutput)
+\end{equation}
+$$
+
+**`r colorize("Classification of Variables.", "red")`**
+
+Predictive analytics requires data, often with a large number of
+observations and variables. In Exam PA, we will be mostly dealing with
+datasets that can be displayed in the following observation-by-variable
+rectangular array format (such data is called ***structured data*** and
+is stored in `R` in a data frame).
+
+| ***Observation*** | Target | ***Predictors*** |          |       |          |
+|:-----------------:|:------:|:----------------:|:--------:|:-----:|:--------:|
+|                   |  $Y$   |      $X_1$       |  $X_2$   | $...$ |  $X_p$   |
+|        $1$        | $Y_1$  |     $X_{11}$     | $X_{12}$ | $...$ | $X_{1p}$ |
+|        $2$        | $Y_2$  |     $X_{21}$     | $X_{22}$ | $...$ | $X_{2p}$ |
+|       $...$       | $...$  |      $...$       |  $...$   | $...$ |  $...$   |
+|        $n$        | $Y_n$  |     $X_{n1}$     | $X_{n2}$ | $...$ | $X_{np}$ |
+
+In the dataset above, the *observations* are shown across the rows of
+the array (from 1 to $n$) and the corresponding *variable* values are
+shown in the columns. Each observation comprises measurements taken for
+multiple variables, so, for example, the first observation of the data
+consists of:
+
+$$
+Y_1,X_{11},X_{12},...,X_{1p},
+$$
+
+not just $Y_1$ or $X_{11},X_{12},...,X_{1p}$. In the actuarial salary
+example above, you can think of each observation as an actuary you are
+able to sample, and the variables represent the characteristics of that
+actuary.
+
+Generally speaking, there are two ways to classify variables in a
+predictive analytics context: By their role in the study (intended use)
+or by their nature (characteristics).
+
+-   **`r colorize("By Role: Target vs. Predictors", "red")`**
+
+    In the dataset above, we refer to the variable that we are
+    interested in as the ***target variable***, or simply the
+    ***target*** (a.k.a ***response variable***, ***dependent
+    variable***, ***output variable**, **outcome variable**),* and
+    denote it by $\bf{Y}$.
+
+    Despite the target variable being our prime interest, in most
+    situations we cannot change the target directly, but we have more
+    direct control over some associated variables which may offer
+    explanatory information about the target. These variables go by
+    different names, such as ***predictors***, ***explanatory variables,
+    independent variables, input variables,*** or sometimes simply
+    ***variables*** if no confusion arises, and we denote them by
+    $\bf{X_1, X_2, ..., X_p}$. In an actuarial context, predictors are
+    also known as risk factors or risk drivers. In the rest of this
+    manual, we will mostly use the term "predictors" and "features".
+
+    Throughout the study of predictive analytics, it is useful to think
+    of a predictive model as the following functional relationship
+    between the target variable $\bf{Y}$ and the corresponding set of
+    $\bf{p}$ predictors $\bf{X=(X_1,...,X_p)}$ (collected as a vector):
+
+    $$
+    \begin{equation}
+    Y_i=f\left(X_i\right)+\epsilon_i, i=1,...,n
+    (\#eq:modelformula)
+    \end{equation}
+    $$
+
+    where:
+
+    -   The subscript $i$ signifies the $i$-th observation in the
+        dataset, so $Y_i$ is the value of the target variable for the
+        $i$-th observation and $X_i = (X_{i1}, ..., X_{ip})$ is the
+        corresponding vector of predictor values.
+    -   $f$ is a fixed (non-random) but unknown function corresponding
+        the predictors and the target variable.
+        -   Without the subscript $i$ (note that is $f$ rather than
+            $f_i$), the function applies to all observations in the
+            data, and forms the "systematic" part of
+            \@ref(eq:modelformula).
+        -   Largely synonymous with the model, this function carries the
+            systematic information that the predictors offer about the
+            target variable, and allows us to differentiate, or
+            discriminate, the observations of the target variable on the
+            basis of those predictors.
+    -   $\epsilon_i$ is a zero-mean random error term carrying
+        information that is specific to the $i$-th observation, hence
+        "idiosyncratic" and the presence of the subscript $i$.
+        -   It can be regarded as the catch-all for what the systematic
+            component of the model misses, e.g., the true relationship
+            between $X$ and $Y$ is probably more complex than
+            \@ref(eq:modelformula), there are other variables associated
+            with $Y$ omitted by the model.
+
+    Although \@ref(eq:modelformula) looks abstract and the exam will not
+    test it directly, it will provide a useful framework for thinking
+    about predictive analytics. For convenience, we will refer to $f$
+    and $\epsilon_i$ respectively as the signal function and the noise,
+    which are widely used terms originally stemming from engineering.
+
+    Goal of Predictive Analytics
+
+    :   We are interested in the signal, but the data we have is
+        "contaminated" with noise.
+
+        The goal of predictive analytics is to filter out the noise and
+        use a variety of tools and techniques to learn as much and as
+        accurately about the signal as possible from the data.
+
+        The knowledge about the signal can then provide us with a basis
+        for understanding the data-generating process underlying the
+        population of interest and making predictions for the target
+        variable.
+
+-   **`r colorize("By Nature: Numeric vs. Categorical", "red")`**
+
+    Variables can also be classified as ***numeric*** variables or
+    ***categorical*** variables. Such a classification has important
+    implications for developing an effective predictive model that
+    aligns with the characteristics of the target variable and
+    predictors to produce realistic output.
+
+    -   **Numeric (Quantitative) Variables:** Numeric values that can
+        take the form of numbers with a well-defined order and an
+        associated range.
+        -   **Discrete:** Restricted to only certain numeric values in
+            that range, e.g., non-negative numbers.
+        -   **Continuous:** Can assume any numeric value within the
+            range of the variable, at least in theory.
+    -   **Categorical (Qualitative/Factor) Variables:** Takes predefined
+        values in a countable collection of "categories", also called
+        the ***levels*** or ***classes*** of the variable.
+        -   **Nominal:**Levels have no numeric order, i.e., we cannot
+            say which category is larger or smaller.
+            -   **Examples:** Smoking Status, Gender, Marital Status
+        -   **Ordinal:** Levels have a natural order.
+            -   **Examples:** Health Status (Poor, Moderate, Good), Risk
+                Group (Preferred, Standard, Rated, Uninsurable).
+
+    ```{block2, type='rmdnote'}
+    In predictive modeling, the type of model to use is largely determined by the the nature of the target variable, not the predictors.
+
+    In other words, the distinction between numeric and categorical variables is relatively unimportant when they serve as predictors of a model, but we do need to take the distinction properly into account when they serve as the target variable.
+
+    Some predictive models (e.g., linear models) work well only for numeric target variables while some (e.g., GLMs and decision trees) apply to both numeric and categorical target variables.
+    ```
+
+**Supervised vs. Unsupervised Problems.**
+
+Given the notions of target vs. predictor variables and numeric vs.
+categorical variables, we can further classify predictive analytics
+problems. Depending on the presence of a target variable and the
+objective of analysis, we can describe them as ***supervised*** or
+***unsupervised learning***.
+
+-   **Supervised Learning:** Refers to those for which there is a target
+    variable "supervising" or guiding the analysis, and our goal is to
+    understand the relationship between the target and the predictors,
+    and/or make accurate predictions for the target based on the
+    predictors.
+    -   <div>
+
+        | **Models:** GLMs (including linear models) and Decision Trees
+
+        </div>
+-   **Unsupervised Learning:** For unsupervised learning methods, there
+    is no target variable supervising our analysis, and we are
+    interested in extracting relationships and structures between
+    different variables in the data.
+    -   <div>
+
+        | **Models:** Principal Components Analysis (PCA) and Cluster Analysis
+
+        </div>
+
+**Regression vs. Classification Problems.** Finally, it is customary to
+refer to supervised learning problems with a numeric target variable as
+***regression problems*** (an exception is logistic regression, for
+which the target variable is binary). In contrast, when the target
+variable is categorical in nature, we are dealing with ***classification
+problems***. A predictive model for predicting a categorical target
+involves "classifying" its observations to a certain level and is aptly
+called a *classifier*.
+
+Both regression and classification problems are of importance in Exam PA
+and predictive modeling in general. The two kinds of predictive
+analytics problems have their unique features and will be covered in
+detail in Part II of this manual.
+
+## The Model Building Process {#the-model-building-process}
+
+Now that we have a first taste of what predictive analytics is like, in
+this important and rather lengthy section I will walk you through the
+main steps (the “life cycle”) involved in the construction and
+evaluation of a predictive model. In practice, model building typically
+requires a sequence of complex and inter-related decisions. The whole
+process is iterative and often more of an art than a science. The
+framework here is necessarily simplified and focuses on the most
+important steps in Exam PA, but is rich enough to show you what it takes
+to build a good model in real life.
+
+### Stage 1: Problem Definition
+
+The first step in any model building exercise is to clearly formulate
+the business problem to which predictive analytics will be applied.
+
+#### Characteristics of predictive modeling problems {.unnumbered}
+
+Before we decide to apply predictive analytics to solve a business
+problem, we should ensure that it is indeed a problem that should be
+addressed by predictive modeling. The business problem you will see on
+the exam must be one for which predictive modeling is suitable
+(otherwise, why is this exam called "Predictive Analytics!?" 😉), but a
+conceptual exam task, in an attempt to test Learning Outcome b) of Topic
+1 in Exam PA: **"Describe the characteristics of predictive modeling
+problems,"**
+
+::: {.rmdtip data-latex="{EXAM NOTE}"}
+Many of these characteristics border on common sense, but from an exam
+point of view, it is safe to follow the wording of the PA modules and
+phrase your response in a way expected by the SOA graders.
+:::
+
+::: {.rmdwarn data-latex="{EXAM NOTE}"}
+*(3 points)* Explain two (or three) reasons why this business problem
+should be addressed by predictive modeling.
+:::
+
+Here are some common characteristics of predictive modeling problems
+suggested in the PA modules: *(A typical predictive modeling problem
+will have most, but not necessarily all of these characteristics.)*
+
+-   **(Issue)** There is a clearly identified and defined business issue
+    that needs to be addressed.\
+    Predictive analytics always comes with a context. In the given
+    context, what overarching goal will developing a predictive model
+    help us achieve? What noble cause is it serving? There are often
+    financial ends with a business impact, e.g., profit enhancement,
+    cost reduction, or process efficiency, and the business issue will
+    be made clear in the exam project statement.
+
+-   **(Questions)** The issue can be addressed with a few well-defined
+    questions.\
+    For predictive analytics to be applicable, the broad issue has to be
+    broken down into more specific questions, e.g.: *(This list is far
+    from exhaustive.)*
+
+    > -   What data do we need?
+    > -   What is the target or outcome?
+    > -   What is the success criteria, i.e., how will the model
+    >     performance be evaluated?
+
+-   **(Data)** Good and useful data is available for answering the
+    questions above.\
+    We can’t do predictive modeling in the vacuum without data. The
+    various considerations with the use of data will be discussed in
+    Stage 2 below in detail.
+
+-   **(Impact)** The predictions will likely drive actions or increase
+    understanding.\
+    If predictive analytics is an appropriate approach, then the
+    predictions produced by our models should lead to implementable
+    changes or improve our understanding of the business issue.
+
+-   **(Better solution)** Predictive analytics likely produces a
+    solution better than any existing approach.
+
+    If there is an easier solution to the business problem without using
+    a predictive model, then perhaps predictive analytics is not
+    warranted in the first place.
+
+-   **(Update)** We can continue to monitor and update the models when
+    new data becomes available.
+
+#### Problem Definition {.unnumbered}
+
+After deciding to use predictive analytics to address the business issue
+of interest, we should define the problem as clearly as possible.
+
+**How to produce a meaningful problem definitions?**
+
+**General Strategy for Problem Definition:** Get to the root cause of
+the business issue and make it specific enough to be solvable.
+
+-   **(Hypotheses)** It is useful to use our prior knowledge of the
+    business problem to ask questions and develop hypotheses that we can
+    prove or disprove in the course of our analytic work. Doing so helps
+    us gain a clearer understanding of the business issue and guide our
+    efforts in a clearly defined way. With the questions and hypotheses,
+    we know where to focus on.
+
+-   **(KPIs)** [**Assess the outcome**]{.underline} by [**selecting
+    appropriate key performance indicators**]{.underline}, or
+    [**KPIs**]{.underline} that possess the following properties:
+
+    -   **(Relevance)** The KPIs should align with the overall business
+        objective and the interest of your client as closely as
+        possible.
+
+    -   **(Measurability)** They should be easily measurable and provide
+        an objective, quantitative basis to measure the success of the
+        project.
+
+#### Constraints {.unnumbered}
+
+As soon as we have defined the business problem clearly, it is important
+to evaluate the feasibility of solving the business problem and
+implementing the predictive analytic solution.Considerations and
+constraints when evaluating and prioritizing business problems include:
+
+-   **Availability of easily accessible and high-quality data.**
+
+-   **Implementation issues**:
+
+    -   Infrastructure and technology to fit complex models efficiently
+
+    -   Timeline for completing the project
+
+    -   Cost and effort required to maintain the selected model
+
+::: {.rmdnote data-latex="{EXAM NOTE}"}
+If a model is operationally prohibitive to execute, then it makes sense
+to trade some prediction performance for ease of implementation.
+:::
+
+### Stage 2: Data Collection and Validation
+
+Predictive analytics relies on models, which are in turn constructed
+from data.
+
+After defining the business problem, a significant amount of time and
+effort is spent collecting useful data will underline the predictive
+model we are going to build.
+
+This data collection stage is more important and intricate generally
+accounted for, otherwise our analysis can result in "garbage in, garbage
+out" (e.g., low-quality data produces low-quality output).
+
+**Key considerations and pitfalls to avoid related to collection and use
+of data:**
+
+#### Data Design {.unnumbered}
+
+-   **Relevance:** Need to ensure data is [**unbiased**]{.underline}
+    (e.g., [**representative**]{.underline} of the environment where the
+    model will operate[)]{.underline}
+    -   **Population:** Data source should be a [**proxy**]{.underline}
+        of the true population of interest.
+        -   If the data source is not a good proxy, then taking a larger
+            dataset does not help and [**repeats bias**]{.underline}
+            over and over again.
+    -   **Time Frame:** Time period that best reflects the business
+        environment of interest.
+        -   [**Recent history is more predictive of the near
+            future**]{.underline}.
+-   **Sampling:** The process of taking subsets of observations from the
+    data source to generate the dataset.
+    -   **Purpose:**
+        -   The underlying population is often too big to handle, and we
+            need smaller, more manageable subset to form our data.
+
+        -   The observations sampled should closely resemble the
+            business environment in which our predictive model will be
+            applied in the future.
+    -   **Types:**
+        -   **Random Sampling:** Randomly draw observations from the
+            underlying population [**without replacement**]{.underline}.
+            **Each record is equally likely to be selected.**
+
+        -   **Stratified Sampling:** Divide the underlying dataset into
+            a \# of non-overlapping "[**strata**]{.underline}" in a
+            [**non-random**]{.underline} fashion, then
+            [**randomly**]{.underline} sampling a set \# of observations
+            from each stratum, and finally combining these observations
+            to form the overall sample $\Rightarrow$ Ensures every
+            stratum is properly [**represented**]{.underline} in the
+            collected data in proportion to its importance.
+
+            **Ways to Define the "Strata":**
+
+            -   **W.R.T. the Target Variable:** Slice the distribution
+                of the target variable (numeric or categorical) into a
+                \# of non-overlapping regions and identify each region
+                as a stratum.
+                -   The sampled data will properly include observations
+                    from the whole spectrum of the distribution of the
+                    target.
+            -   **W.R.T. the Predictors:** The strata can also be
+                created from the predictors, usually factors.
+                -   If it is desired to have a sample with proportional
+                    observations from Predictor 1 (a 3-level factor) and
+                    from Predictor 2 (a 4-level factor), then we may use
+                    the $3 * 4 = 12$ combinations of factor levels to
+                    define the strata and carry out stratified sampling.
+
+            **Special Cases of Stratified Sampling:**
+
+            -   **Oversampling** and **Undersampling:** These are
+                sampling methods designed specifically for unbalanced
+                data (Subsection 4.1.4)
+
+            -   **Systematic Sampling:** Draw observations according to
+                a [**set pattern**]{.underline} and there is [**no
+                random mechanism**]{.underline} controlling which
+                observations are sampled.
+-   **Granularity:** Refers to how [**precisely**]{.underline} a
+    variable is measured, i.e., level of [detail]{.underline} for the
+    information contained by the variable.
+    -   At the data design stage, it is a [**good idea to use a
+        relatively high level of granularity**]{.underline} as it is
+        always possible to go from a higher level to a lower level down
+        the track, but not the other way around.
+
+#### Data Quality Issues {#data-quality-issues .unnumbered}
+
+[**Data Validation:**]{color="red"} The process of ensuring the quality and
+appropriateness of the data available.
+
+-   [**Reasonableness:**]{color="red"} Data values should be reasonable (key summary
+    statistics make sense) in the context of the business problem.
+
+-   [**Consistency:**]{color="red"} Data records should be inputted consistency on the
+    same basis and rules (same units for numeric, and same coding scheme
+    for categorical) so they are directly comparable.
+
+-   [**Sufficient Documentation:**]{color="red"} Other users can gain an accurate
+    understanding of miscellaneous aspects of the data.
+
+    1.  Overall description of data, including data source and when it
+        was collected
+    2.  Data Dictionary (name, definition, format of each variable)
+    3.  Notes about past updates or irregularities
+    4.  Statement about accountability for correctness of data
+    5.  Description of the governance process used to manage the data
+    6.  Proxy variables – Variables that are not prohibited variables
+        themselves, but are closely related to prohibited variables.
+        -   Occupation (Proxy of Gender/Income)
+        -   Geographical Location (Proxy of Age/Income)
+
+
+#### Other Data Issues {#other-data-issues .unnumbered}
+
+##### Structured vs. Unstructured Data {-}
+
+```{r, echo = FALSE, messages=FALSE, warning=FALSE}
+library(tidyverse)
+library(tibble)
+library(kableExtra)
+
+df <- data.frame(
+  `Category` = c("Definition", "Pros", "Cons"),
+  `Structured Data` = c(
+    "Data that fit into a tabular arrangement",
+    "Easier to manipulate",
+    "Cannot represent information that does not naturally fit into a tabular arrangement"
+  ),
+  `Unstructured Data` = c("Data that do not, e.g., text, image, audio", "More flexible", "Harder to access and has to be carefully pre-processed"),
+  stringsAsFactors = FALSE
+)
+
+kable(df,
+  booktabs = TRUE,
+  linesep = "",
+  longtable = TRUE,
+  caption = "Structured vs. Unstructured Data",
+  columns = c("Category", "Structured Data", "Unstructured Data")
+) %>% kable_style()
+
+```
+
+##### Personally Identifiable Information (PII) {-}
+
+Information that can be used to trace an individual's identity, e.g., SSN, address, photographs, and biometric records.
+
+[How to Handle PII:]{color="red"}
+
+-   [**Anonymization:**] Anonymize the data to remove the PII.
+
+-   [**Data Security:**] Ensure that the data receives sufficient protection (encryption, access/transfer rights).
+
+-   [**Terms of Use:**] Be well aware of the terms and conditions, and the privacy policy related to the collection and use of data.
+
+
+##### Variables with Legal/Ethical Concerns {-}
+
+
+
+
+## Bias-Variance Trade-off {#bias-variance-trade-off}
+
+## Feature Generation and Selection {#feature-generation-and-selection}
+
+## Conceptual Review Questions for Chapter 1 {#conceptual-review-questions-for-chapter-1}

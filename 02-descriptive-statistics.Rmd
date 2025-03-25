@@ -39,18 +39,22 @@ For this section, we are going to use Hadley Wickham's `ggplot2` package, which 
 ### Bar Chart
 
 ```{r}
-
-ggplot(data = df,
-       mapping = aes(x = Species,
-                     fill = Species)) +
+ggplot(
+  data = df,
+  mapping = aes(
+    x = Species,
+    fill = Species
+  )
+) +
   geom_bar()
-
 ```
 
 ## Histogram
 ```{r}
-ggplot(data = df,
-       mapping = aes(x = Sepal.Length)) +
+ggplot(
+  data = df,
+  mapping = aes(x = Sepal.Length)
+) +
   geom_histogram() +
   labs(
     title = "Histogram of Sepal Length",
@@ -60,11 +64,15 @@ ggplot(data = df,
 
 ### Density Function
 ```{r}
-ggplot(data = df,
-       mapping = aes(x = Sepal.Length)) +
-  geom_density(fill = "red",
-               col = "red",
-               alpha = .5) +
+ggplot(
+  data = df,
+  mapping = aes(x = Sepal.Length)
+) +
+  geom_density(
+    fill = "red",
+    col = "red",
+    alpha = .5
+  ) +
   labs(
     title = "Density of Sepal Length",
     x = "Sepal Length",
@@ -72,18 +80,24 @@ ggplot(data = df,
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(hjust = .5,
-                              face = "bold")
+    plot.title = element_text(
+      hjust = .5,
+      face = "bold"
+    )
   )
 ```
 
 ### Scatterplot
 
 ```{r}
-ggplot(data = df,
-       mapping = aes(x = Sepal.Length,
-                     y = Petal.Width,
-                     col = Petal.Width)) +
+ggplot(
+  data = df,
+  mapping = aes(
+    x = Sepal.Length,
+    y = Petal.Width,
+    col = Petal.Width
+  )
+) +
   geom_point() +
   guides(col = "none")
 ```
@@ -92,11 +106,15 @@ ggplot(data = df,
 
 A Jitter plot is simply a scatterplot with a certain offset.
 ```{r}
-ggplot(data = df,
-       mapping = aes(x = Sepal.Length,
-                     y = Petal.Width,
-                     col = Petal.Width)) +
-  geom_jitter() + #scatterplot with offset
+ggplot(
+  data = df,
+  mapping = aes(
+    x = Sepal.Length,
+    y = Petal.Width,
+    col = Petal.Width
+  )
+) +
+  geom_jitter() + # scatterplot with offset
   guides(col = "none")
 ```
 
@@ -105,13 +123,19 @@ ggplot(data = df,
 We can add a regression line to the last jitter plot by adding a call to `geom_smooth`, as in:
 
 ```{r}
-ggplot(data = df,
-       mapping = aes(x = Sepal.Length,
-                     y = Petal.Width,
-                     col = Petal.Width)) +
+ggplot(
+  data = df,
+  mapping = aes(
+    x = Sepal.Length,
+    y = Petal.Width,
+    col = Petal.Width
+  )
+) +
   geom_jitter() +
-  geom_smooth(method = "lm",
-              formula = y ~ x) + ## Simple Linear Regression, regressing y over x
+  geom_smooth(
+    method = "lm",
+    formula = y ~ x
+  ) + ## Simple Linear Regression, regressing y over x
   guides(col = "none")
 ```
 
