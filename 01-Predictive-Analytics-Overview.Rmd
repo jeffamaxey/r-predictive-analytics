@@ -511,18 +511,19 @@ of data:**
 
 #### Data Quality Issues {#data-quality-issues .unnumbered}
 
-[**Data Validation:**]{color="red"} The process of ensuring the quality and
-appropriateness of the data available.
+[**Data Validation:**]{color="red"} The process of ensuring the quality
+and appropriateness of the data available.
 
--   [**Reasonableness:**]{color="red"} Data values should be reasonable (key summary
-    statistics make sense) in the context of the business problem.
+-   [**Reasonableness:**]{color="red"} Data values should be reasonable
+    (key summary statistics make sense) in the context of the business
+    problem.
 
--   [**Consistency:**]{color="red"} Data records should be inputted consistency on the
-    same basis and rules (same units for numeric, and same coding scheme
-    for categorical) so they are directly comparable.
+-   [**Consistency:**]{color="red"} Data records should be inputted
+    consistency on the same basis and rules (same units for numeric, and
+    same coding scheme for categorical) so they are directly comparable.
 
--   [**Sufficient Documentation:**]{color="red"} Other users can gain an accurate
-    understanding of miscellaneous aspects of the data.
+-   [**Sufficient Documentation:**]{color="red"} Other users can gain an
+    accurate understanding of miscellaneous aspects of the data.
 
     1.  Overall description of data, including data source and when it
         was collected
@@ -535,10 +536,9 @@ appropriateness of the data available.
         -   Occupation (Proxy of Gender/Income)
         -   Geographical Location (Proxy of Age/Income)
 
-
 #### Other Data Issues {#other-data-issues .unnumbered}
 
-##### Structured vs. Unstructured Data {-}
+##### Structured vs. Unstructured Data {.unnumbered}
 
 ```{r, echo = FALSE, messages=FALSE, warning=FALSE}
 library(tidyverse)
@@ -566,23 +566,68 @@ kable(df,
 
 ```
 
-##### Personally Identifiable Information (PII) {-}
+##### Personally Identifiable Information (PII) {.unnumbered}
 
-Information that can be used to trace an individual's identity, e.g., SSN, address, photographs, and biometric records.
+Information that can be used to trace an individual's identity, e.g.,
+SSN, address, photographs, and biometric records.
 
 [How to Handle PII:]{color="red"}
 
 -   [**Anonymization:**] Anonymize the data to remove the PII.
 
--   [**Data Security:**] Ensure that the data receives sufficient protection (encryption, access/transfer rights).
+-   [**Data Security:**] Ensure that the data receives sufficient
+    protection (encryption, access/transfer rights).
 
--   [**Terms of Use:**] Be well aware of the terms and conditions, and the privacy policy related to the collection and use of data.
+-   [**Terms of Use:**] Be well aware of the terms and conditions, and
+    the privacy policy related to the collection and use of data.
 
+##### Variables with Legal/Ethical Concerns {#variables-with-legal-ethical-concerns .unnumbered}
 
-##### Variables with Legal/Ethical Concerns {-}
+-   **Sensitive Variables:** Different treatment based on sensitive
+    variables may lead to [**unfair discrimination**]{.underline} and
+    raise [**equity**]{.underline} concerns.
 
+    -   **Examples:** Race, ethnicity, gender, age, income, disability
+        status, and other prohibited classes.
 
+-   **Proxy Variables:** Variables that are not prohibited variables
+    themselves, but are closely related to (hence serve as a "proxy" of)
+    prohibited variables.
 
+    -   **Examples:** Occupation (possible proxy of gender);
+        Geographical Location (possible proxy of age/income).
+
+##### Target Leakage {#sec-target-leakage .unnumbered}
+
+-   **Definition:** When predictors in a model "leak" information about
+    the target variable that [**would not be available**]{.underline}
+    when the model is deployed in practice.
+-   **Key to Detecting Target Leakage – Timing:** These variables are
+    observed [**at the same time as**]{.underline} or
+    [**after**]{.underline} the target variable.
+-   **Problem With This Issue:** These variables cannot serve as
+    predictors in practice and [**would lead to artificially good model
+    performance**]{.underline} if mistakenly included.
+-   **An Extreme and Commonly Tested Form of Target Leakage:** When the
+    target variable itself is included as a predictor or is used to
+    develop new features, e.g., PCA and cluster groups.
+
+Examples of Target Leakage:
+
+1.  Suppose that you are interested in predicting whether or not a
+    policyholder of an insurance policy will incur a loss or not in a
+    future policy period (binary target variable). If the number of
+    incurred losses is one of the predictors you use, then it appears
+    that you will be able to make perfect predictions. The knowledge of
+    number of incurred losses would not be available at the time we
+    predict the occurence of incurred losses in practice, and we cannot
+    use an unknown quantity to predict another unknown quantity. The
+    same applies for loss severity, which cannot function as a predictor
+    of loss incurrence in practice.
+2.  An extreme form of target leakage that is commonly tested is when
+    the target variable itself is included as a predictor, or is used to
+    develop new variables (e.g., principal components, to be introduced
+    in Section \@ref(6.1) for predicting the same target variable.
 
 ## Bias-Variance Trade-off {#bias-variance-trade-off}
 

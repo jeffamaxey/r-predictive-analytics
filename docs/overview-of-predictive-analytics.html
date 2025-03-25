@@ -23,7 +23,7 @@
 <meta name="author" content="Jeff Maxey" />
 
 
-<meta name="date" content="2025-03-19" />
+<meta name="date" content="2025-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -708,16 +708,17 @@ the track, but not the other way around.</li>
 </div>
 <div id="data-quality-issues" class="section level4 unnumbered hasAnchor">
 <h4>Data Quality Issues<a href="overview-of-predictive-analytics.html#data-quality-issues" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><span style="color: red;"><strong>Data Validation:</strong></span> The process of ensuring the quality and
-appropriateness of the data available.</p>
+<p><span style="color: red;"><strong>Data Validation:</strong></span> The process of ensuring the quality
+and appropriateness of the data available.</p>
 <ul>
-<li><p><span style="color: red;"><strong>Reasonableness:</strong></span> Data values should be reasonable (key summary
-statistics make sense) in the context of the business problem.</p></li>
-<li><p><span style="color: red;"><strong>Consistency:</strong></span> Data records should be inputted consistency on the
-same basis and rules (same units for numeric, and same coding scheme
-for categorical) so they are directly comparable.</p></li>
-<li><p><span style="color: red;"><strong>Sufficient Documentation:</strong></span> Other users can gain an accurate
-understanding of miscellaneous aspects of the data.</p>
+<li><p><span style="color: red;"><strong>Reasonableness:</strong></span> Data values should be reasonable
+(key summary statistics make sense) in the context of the business
+problem.</p></li>
+<li><p><span style="color: red;"><strong>Consistency:</strong></span> Data records should be inputted
+consistency on the same basis and rules (same units for numeric, and
+same coding scheme for categorical) so they are directly comparable.</p></li>
+<li><p><span style="color: red;"><strong>Sufficient Documentation:</strong></span> Other users can gain an
+accurate understanding of miscellaneous aspects of the data.</p>
 <ol style="list-style-type: decimal">
 <li>Overall description of data, including data source and when it
 was collected</li>
@@ -736,8 +737,8 @@ themselves, but are closely related to prohibited variables.
 </div>
 <div id="other-data-issues" class="section level4 unnumbered hasAnchor">
 <h4>Other Data Issues<a href="overview-of-predictive-analytics.html#other-data-issues" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div id="structured-vs.-unstructured-data" class="section level5 hasAnchor" number="1.2.2.0.1">
-<h5><span class="header-section-number">1.2.2.0.1</span> Structured vs. Unstructured Data<a href="overview-of-predictive-analytics.html#structured-vs.-unstructured-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="structured-vs.-unstructured-data" class="section level5 unnumbered hasAnchor">
+<h5>Structured vs. Unstructured Data<a href="overview-of-predictive-analytics.html#structured-vs.-unstructured-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <table>
 <caption><span id="tab:unnamed-chunk-11">TABLE 1.1: </span>Structured vs. Unstructured Data</caption>
 <thead>
@@ -765,6 +766,72 @@ themselves, but are closely related to prohibited variables.
 </tr>
 </tbody>
 </table>
+</div>
+<div id="personally-identifiable-information-pii" class="section level5 unnumbered hasAnchor">
+<h5>Personally Identifiable Information (PII)<a href="overview-of-predictive-analytics.html#personally-identifiable-information-pii" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Information that can be used to trace an individual’s identity, e.g.,
+SSN, address, photographs, and biometric records.</p>
+<p><span style="color: red;">How to Handle PII:</span></p>
+<ul>
+<li><p>[<strong>Anonymization:</strong>] Anonymize the data to remove the PII.</p></li>
+<li><p>[<strong>Data Security:</strong>] Ensure that the data receives sufficient
+protection (encryption, access/transfer rights).</p></li>
+<li><p>[<strong>Terms of Use:</strong>] Be well aware of the terms and conditions, and
+the privacy policy related to the collection and use of data.</p></li>
+</ul>
+</div>
+<div id="variables-with-legal-ethical-concerns" class="section level5 unnumbered hasAnchor">
+<h5>Variables with Legal/Ethical Concerns<a href="overview-of-predictive-analytics.html#variables-with-legal-ethical-concerns" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li><p><strong>Sensitive Variables:</strong> Different treatment based on sensitive
+variables may lead to <u><strong>unfair discrimination</strong></u> and
+raise <u><strong>equity</strong></u> concerns.</p>
+<ul>
+<li><strong>Examples:</strong> Race, ethnicity, gender, age, income, disability
+status, and other prohibited classes.</li>
+</ul></li>
+<li><p><strong>Proxy Variables:</strong> Variables that are not prohibited variables
+themselves, but are closely related to (hence serve as a “proxy” of)
+prohibited variables.</p>
+<ul>
+<li><strong>Examples:</strong> Occupation (possible proxy of gender);
+Geographical Location (possible proxy of age/income).</li>
+</ul></li>
+</ul>
+</div>
+<div id="sec-target-leakage" class="section level5 unnumbered hasAnchor">
+<h5>Target Leakage<a href="overview-of-predictive-analytics.html#sec-target-leakage" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li><strong>Definition:</strong> When predictors in a model “leak” information about
+the target variable that <u><strong>would not be available</strong></u>
+when the model is deployed in practice.</li>
+<li><strong>Key to Detecting Target Leakage – Timing:</strong> These variables are
+observed <u><strong>at the same time as</strong></u> or
+<u><strong>after</strong></u> the target variable.</li>
+<li><strong>Problem With This Issue:</strong> These variables cannot serve as
+predictors in practice and <u><strong>would lead to artificially good model
+performance</strong></u> if mistakenly included.</li>
+<li><strong>An Extreme and Commonly Tested Form of Target Leakage:</strong> When the
+target variable itself is included as a predictor or is used to
+develop new features, e.g., PCA and cluster groups.</li>
+</ul>
+<p>Examples of Target Leakage:</p>
+<ol style="list-style-type: decimal">
+<li>Suppose that you are interested in predicting whether or not a
+policyholder of an insurance policy will incur a loss or not in a
+future policy period (binary target variable). If the number of
+incurred losses is one of the predictors you use, then it appears
+that you will be able to make perfect predictions. The knowledge of
+number of incurred losses would not be available at the time we
+predict the occurence of incurred losses in practice, and we cannot
+use an unknown quantity to predict another unknown quantity. The
+same applies for loss severity, which cannot function as a predictor
+of loss incurrence in practice.</li>
+<li>An extreme form of target leakage that is commonly tested is when
+the target variable itself is included as a predictor, or is used to
+develop new variables (e.g., principal components, to be introduced
+in Section @ref(6.1) for predicting the same target variable.</li>
+</ol>
 </div>
 </div>
 </div>
