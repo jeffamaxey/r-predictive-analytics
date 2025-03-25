@@ -622,28 +622,28 @@ of data:</strong></p>
 <div id="data-design" class="section level4 unnumbered hasAnchor">
 <h4>Data Design<a href="overview-of-predictive-analytics.html#data-design" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <ul>
-<li><strong>Relevance:</strong> Need to ensure data is <u><strong>unbiased</strong></u>
-(e.g., <u><strong>representative</strong></u> of the environment where the
-model will operate<u>)</u>
+<li><strong><span style="color: red;">Relevance</span>:</strong> Need to ensure data is
+<u><strong>unbiased</strong></u> (e.g., <u><strong>representative</strong></u>
+of the environment where the model will operate<u>)</u>
 <ul>
-<li><strong>Population:</strong> Data source should be a <u><strong>proxy</strong></u>
-of the true population of interest.
+<li><strong><span style="color: red;">Population</span>:</strong> Data source should be a
+<u><strong>proxy</strong></u> of the true population of interest.
 <ul>
 <li>If the data source is not a good proxy, then taking a larger
 dataset does not help and <u><strong>repeats bias</strong></u>
 over and over again.</li>
 </ul></li>
-<li><strong>Time Frame:</strong> Time period that best reflects the business
-environment of interest.
+<li><strong><span style="color: red;">Time Frame</span>:</strong> Time period that best reflects
+the business environment of interest.
 <ul>
 <li><u><strong>Recent history is more predictive of the near
 future</strong></u>.</li>
 </ul></li>
 </ul></li>
-<li><strong>Sampling:</strong> The process of taking subsets of observations from the
-data source to generate the dataset.
+<li><strong><span style="color: red;">Sampling</span>:</strong> The process of taking subsets of
+observations from the data source to generate the dataset.
 <ul>
-<li><strong>Purpose:</strong>
+<li><strong><span style="color: red;">Purpose</span>:</strong>
 <ul>
 <li><p>The underlying population is often too big to handle, and we
 need smaller, more manageable subset to form our data.</p></li>
@@ -651,32 +651,34 @@ need smaller, more manageable subset to form our data.</p></li>
 business environment in which our predictive model will be
 applied in the future.</p></li>
 </ul></li>
-<li><strong>Types:</strong>
+<li><strong><span style="color: red;">Types</span>:</strong>
 <ul>
-<li><p><strong>Random Sampling:</strong> Randomly draw observations from the
-underlying population <u><strong>without replacement</strong></u>.
-<strong>Each record is equally likely to be selected.</strong></p></li>
-<li><p><strong>Stratified Sampling:</strong> Divide the underlying dataset into
-a # of non-overlapping “<u><strong>strata</strong></u>” in a
-<u><strong>non-random</strong></u> fashion, then
-<u><strong>randomly</strong></u> sampling a set # of observations
-from each stratum, and finally combining these observations
-to form the overall sample <span class="math inline">\(\Rightarrow\)</span> Ensures every
-stratum is properly <u><strong>represented</strong></u> in the
-collected data in proportion to its importance.</p>
+<li><p><strong><span style="color: red;">Random Sampling</span>:</strong> Randomly draw
+observations from the underlying population <u><strong>without
+replacement</strong></u>. <strong>Each record is equally likely
+to be selected.</strong></p></li>
+<li><p><strong><span style="color: red;">Stratified Sampling</span>:</strong> Divide the
+underlying dataset into a # of non-overlapping
+“<u><strong>strata</strong></u>” in a <u><strong>non-random</strong></u>
+fashion, then <u><strong>randomly</strong></u> sampling a set #
+of observations from each stratum, and finally combining
+these observations to form the overall sample <span class="math inline">\(\Rightarrow\)</span>
+Ensures every stratum is properly
+<u><strong>represented</strong></u> in the collected data in
+proportion to its importance.</p>
 <p><strong>Ways to Define the “Strata”:</strong></p>
 <ul>
-<li><strong>W.R.T. the Target Variable:</strong> Slice the distribution
-of the target variable (numeric or categorical) into a
-# of non-overlapping regions and identify each region
-as a stratum.
+<li><strong><span style="color: red;">W.R.T. the Target Variable</span>:</strong> Slice the
+distribution of the target variable (numeric or
+categorical) into a # of non-overlapping regions and
+identify each region as a stratum.
 <ul>
 <li>The sampled data will properly include observations
 from the whole spectrum of the distribution of the
 target.</li>
 </ul></li>
-<li><strong>W.R.T. the Predictors:</strong> The strata can also be
-created from the predictors, usually factors.
+<li><strong><span style="color: red;">W.R.T. the Predictors</span>:</strong> The strata can
+also be created from the predictors, usually factors.
 <ul>
 <li>If it is desired to have a sample with proportional
 observations from Predictor 1 (a 3-level factor) and
@@ -687,19 +689,21 @@ define the strata and carry out stratified sampling.</li>
 </ul>
 <p><strong>Special Cases of Stratified Sampling:</strong></p>
 <ul>
-<li><p><strong>Oversampling</strong> and <strong>Undersampling:</strong> These are
-sampling methods designed specifically for unbalanced
-data (Subsection 4.1.4)</p></li>
-<li><p><strong>Systematic Sampling:</strong> Draw observations according to
-a <u><strong>set pattern</strong></u> and there is <u><strong>no
-random mechanism</strong></u> controlling which
-observations are sampled.</p></li>
+<li><p><strong>[Oversampling**]</strong>{color=“red”}** and
+<span style="color: red;">**Undersampling</span>:** These are sampling
+methods designed specifically for unbalanced data
+(Subsection 4.1.4)</p></li>
+<li><p><strong><span style="color: red;">Systematic Sampling</span>:</strong> Draw
+observations according to a <u><strong>set
+pattern</strong></u> and there is <u><strong>no random
+mechanism</strong></u> controlling which observations
+are sampled.</p></li>
 </ul></li>
 </ul></li>
 </ul></li>
-<li><strong>Granularity:</strong> Refers to how <u><strong>precisely</strong></u> a
-variable is measured, i.e., level of <u>detail</u> for the
-information contained by the variable.
+<li><strong><span style="color: red;">Granularity</span>:</strong> Refers to how
+<u><strong>precisely</strong></u> a variable is measured, i.e., level of
+<u>detail</u> for the information contained by the variable.
 <ul>
 <li>At the data design stage, it is a <u><strong>good idea to use a
 relatively high level of granularity</strong></u> as it is
@@ -773,159 +777,279 @@ themselves, but are closely related to prohibited variables.
 <h5>Personally Identifiable Information (PII)<a href="overview-of-predictive-analytics.html#personally-identifiable-information-pii" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Information that can be used to trace an individual’s identity, e.g.,
 SSN, address, photographs, and biometric records.</p>
-<p><span style="color: red;">How to Handle PII:</span></p>
+<p><span style="color: red;"><strong>How to Handle PII:</strong></span></p>
 <ul>
-<li><p>[<strong>Anonymization:</strong>] Anonymize the data to remove the PII.</p></li>
-<li><p>[<strong>Data Security:</strong>] Ensure that the data receives sufficient
-protection (encryption, access/transfer rights).</p></li>
-<li><p>[<strong>Terms of Use:</strong>] Be well aware of the terms and conditions, and
-the privacy policy related to the collection and use of data.</p></li>
+<li><p><span style="color: red;"><strong>Anonymization:</strong></span> Anonymize the data to remove
+the PII.</p></li>
+<li><p><span style="color: red;"><strong>Data Security:</strong></span> Ensure that the data receives sufficient protection (encryption, access/transfer rights).</p></li>
+<li><p><span style="color: red;"><strong>Terms of Use:</strong></span> Be well aware of the terms and conditions, and the privacy policy related to the collection and use of data.</p></li>
 </ul>
 </div>
 <div id="variables-with-legal-ethical-concerns" class="section level5 unnumbered hasAnchor">
 <h5>Variables with Legal/Ethical Concerns<a href="overview-of-predictive-analytics.html#variables-with-legal-ethical-concerns" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <ul>
-<li><p><strong>Sensitive Variables:</strong> Different treatment based on sensitive
-variables may lead to <u><strong>unfair discrimination</strong></u> and
-raise <u><strong>equity</strong></u> concerns.</p>
+<li><p><strong><span style="color: red;">Sensitive Variables:</span></strong> Different treatment based on sensitive variables may lead to <strong>unfair discrimination</strong> and raise <strong>equity</strong> concerns.</p>
 <ul>
-<li><strong>Examples:</strong> Race, ethnicity, gender, age, income, disability
-status, and other prohibited classes.</li>
+<li><strong>Examples:</strong> Race, ethnicity, gender, age, income, disability status, and other prohibited classes.</li>
 </ul></li>
-<li><p><strong>Proxy Variables:</strong> Variables that are not prohibited variables
-themselves, but are closely related to (hence serve as a “proxy” of)
-prohibited variables.</p>
+<li><p><strong><span style="color: red;">Proxy Variables:</span></strong> Variables that are not prohibited variables themselves, but are closely related to (hence serve as a “proxy” of) prohibited variables.</p>
 <ul>
-<li><strong>Examples:</strong> Occupation (possible proxy of gender);
-Geographical Location (possible proxy of age/income).</li>
+<li><strong>Examples:</strong> Occupation (possible proxy of gender); Geographical Location (possible proxy of age/income).</li>
 </ul></li>
 </ul>
 </div>
 <div id="sec-target-leakage" class="section level5 unnumbered hasAnchor">
 <h5>Target Leakage<a href="overview-of-predictive-analytics.html#sec-target-leakage" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <ul>
-<li><strong>Definition:</strong> When predictors in a model “leak” information about
-the target variable that <u><strong>would not be available</strong></u>
-when the model is deployed in practice.</li>
-<li><strong>Key to Detecting Target Leakage – Timing:</strong> These variables are
-observed <u><strong>at the same time as</strong></u> or
-<u><strong>after</strong></u> the target variable.</li>
-<li><strong>Problem With This Issue:</strong> These variables cannot serve as
-predictors in practice and <u><strong>would lead to artificially good model
-performance</strong></u> if mistakenly included.</li>
-<li><strong>An Extreme and Commonly Tested Form of Target Leakage:</strong> When the
-target variable itself is included as a predictor or is used to
-develop new features, e.g., PCA and cluster groups.</li>
+<li><p><strong><span style="color: red;">Definition:</span></strong> When predictors in a model “leak” information about the target variable that <strong>would not be
+available</strong> when the model is deployed in practice.</p></li>
+<li><p><strong><span style="color: red;">Key to Detecting Target Leakage – Timing:</span></strong> These variables are observed <strong>at the same time as</strong> or <strong>after</strong> the target variable.</p></li>
+<li><p><strong><span style="color: red;">Problem With This Issue:</span></strong> These variables cannot serve as predictors in practice and <strong>would lead to artificially good model performance</strong> if mistakenly included.</p></li>
+<li><p><strong><span style="color: red;">An Extreme and Commonly Tested Form of Target Leakage:</span></strong> When the target variable itself is included as a predictor or is used to develop new features, e.g., PCA and cluster groups.</p></li>
 </ul>
-<p>Examples of Target Leakage:</p>
+<p><strong>Examples of Target Leakage:</strong></p>
 <ol style="list-style-type: decimal">
-<li>Suppose that you are interested in predicting whether or not a
-policyholder of an insurance policy will incur a loss or not in a
-future policy period (binary target variable). If the number of
-incurred losses is one of the predictors you use, then it appears
-that you will be able to make perfect predictions. The knowledge of
-number of incurred losses would not be available at the time we
-predict the occurence of incurred losses in practice, and we cannot
-use an unknown quantity to predict another unknown quantity. The
-same applies for loss severity, which cannot function as a predictor
-of loss incurrence in practice.</li>
-<li>An extreme form of target leakage that is commonly tested is when
-the target variable itself is included as a predictor, or is used to
-develop new variables (e.g., principal components, to be introduced
-in Section @ref(6.1) for predicting the same target variable.</li>
+<li><p>Suppose that you are interested in predicting whether or not a policyholder of an insurance policy will incur a loss or not in a future policy period (binary target variable). If the number of incurred losses is one of the predictors you use, then it appears that you will be able to make perfect predictions. The knowledge of number of incurred losses would not be available at the time we predict the occurence of incurred losses in practice, and we cannot use an unknown quantity to predict another unknown quantity. The same applies for loss severity, which cannot function as a predictor of loss incurrence in practice.</p></li>
+<li><p>An extreme form of target leakage that is commonly tested is when the target variable itself is included as a predictor, or is used to develop new variables (e.g., principal components, to be introduced in Section 6.1 for predicting the same target variable.</p></li>
 </ol>
 </div>
 </div>
 </div>
 <div id="sec-stage-3-exploratory-data-analysis" class="section level3 hasAnchor" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> Stage 3: Exploratory Data Analysis<a href="overview-of-predictive-analytics.html#sec-stage-3-exploratory-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>After we have collected and validated the data, the next step is to
-perform exploratory data analysis, with the goal of understanding the
-characteristics of and the key relationships among variables in the
-data. This activity deserves a longer treatment and we will defer it to
-Chapter <a href="#2"><strong>??</strong></a></p>
+<p>After we have collected and validated the data, the next step is to perform exploratory data analysis, with the goal of understanding the characteristics of and the key relationships among variables in the data. This activity deserves a longer treatment and we will defer it to Chapter 2.</p>
 </div>
 <div id="sec-stage-4-model-construction-evaluation-selection" class="section level3 hasAnchor" number="1.2.4">
 <h3><span class="header-section-number">1.2.4</span> Stage 4: Model Construction, Evaluation and Selection<a href="overview-of-predictive-analytics.html#sec-stage-4-model-construction-evaluation-selection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If we use all of the collected data for model fitting, that will leave
-no independent data for assessing the prediction performance of our
-models.</p>
-<div id="sec-training-test-set-split" class="section level4 hasAnchor" number="1.2.4.1">
-<h4><span class="header-section-number">1.2.4.1</span> <strong>Training / Test Set Split</strong><a href="overview-of-predictive-analytics.html#sec-training-test-set-split" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>To construct a model that thrives on future data, it is common practice
-to partition our data into a few parts, each of which serves a different
-role in the model development and evaluation process.</p>
-<p>In the simplest form, the partition splits the full data into two parts,
-the training set and the test set.</p>
+<p>If we use all of the collected data for model fitting, that will leave no independent data for assessing the prediction performance of our models.</p>
+<div id="sec-training-test-set-split" class="section level4 unnumbered hasAnchor">
+<h4><strong>Training / Test Set Split</strong><a href="overview-of-predictive-analytics.html#sec-training-test-set-split" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To construct a model that thrives on future data, it is common practice to partition our data into a few parts, each of which serves a different role in the model development and evaluation process.</p>
+<p>In the simplest form, the partition splits the full data into two parts, the training set and the test set.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Training Set (70-80% of Full Data):</strong>
 <ul>
-<li>The larger part of the full data, the training set, is where you
-“train”, fit, or develop your predictive model to estimate the
-signal function <span class="math inline">\(f\)</span> and, if needed, the model parameters.</li>
-<li>The training is typically done by optimizing a certain objective
-function that describes how well the model matches the training
-observations.</li>
-<li>After the model has been trained, it is ready for making
-predictions on the other part of the full data.</li>
+<li><p>The larger part of the full data, the training set, is where you “train”, fit, or develop your predictive model to estimate the signal function <span class="math inline">\(f\)</span> and, if needed, the model parameters.</p></li>
+<li><p>The training is typically done by optimizing a certain objective function that describes how well the model matches the training observations.</p></li>
+<li><p>After the model has been trained, it is ready for making predictions on the other part of the full data.</p></li>
 </ul></li>
 <li><strong>Test Set (20-30% of Full Data):</strong>
 <ul>
-<li>Following the fitting, you will apply the trained model to make
-a prediction for each observation of the test set, or test data,
-and assess the prediction performance of the model according to
-certain performance metrics.</li>
-<li>Observations in this test set did not participate in the model
-training and will provide much more objective ground for
-evaluating prediction performance when the model is applied to
-new, future data.</li>
-<li>In contrast, evaluating the model on the training set will give
-an overly optimistic and somewhat misleading picture of its true
-predictive performance – the model has already seen the training
-observations and is merely fitting, not predicting those
-observations.</li>
+<li><p>Following the fitting, you will apply the trained model to make a prediction for each observation of the test set, or test data, and assess the prediction performance of the model according to certain performance metrics.</p></li>
+<li><p>Observations in this test set did not participate in the model training and will provide much more objective ground for evaluating prediction performance when the model is applied to new, future data.</p></li>
+<li><p>In contrast, evaluating the model on the training set will give an overly optimistic and somewhat misleading picture of its true predictive performance – the model has already seen the training observations and is merely fitting, not predicting those observations.</p></li>
 </ul></li>
 </ol>
-<p><strong>How Does it Work?</strong></p>
-<p>$$\underset{}{\text{Before fitting models, split the data
-into the training set (70-80%) and the test set (20-30%)}} \
-\
-\</p>
-<p>
-$$</p>
-<p><strong>Why Do The Split?</strong></p>
+<p><strong><span style="color: red;">How Does it Work?</span></strong></p>
+<p><span class="math display">\[
+\begin{equation}
+\underset{\Downarrow}{\text{Before fitting models, split the data
+into the training set (70-80%) and the test set (20-30%)}}\\
+\text{Models are fitted to} \Rightarrow \textbf{Training Set}\\
+\text{Prediction performance is evaluated on}\Rightarrow\textbf{Training Set}\\
+\text{Test set observations must be truly }\underline{unseen}\text{ to the trained model}
+\end{equation}
+\]</span></p>
+<p><strong><span style="color: red;">Why Do The Split?</span></strong></p>
 <ul>
-<li>Model performance on the training set tends to be overly optimistic
-and favor complex models.</li>
-<li>Test set provides a more objective ground for assessing the
-performance of models on new, unseen data.</li>
-<li>Split replicates the way the model will be used in practice.</li>
+<li><p>Model performance on the training set tends to be overly optimistic and favor complex models.</p></li>
+<li><p>Test set provides a more objective ground for assessing the performance of models on new, unseen data.</p></li>
+<li><p>Split replicates the way the model will be used in practice.</p></li>
 </ul>
-<p><strong>Trade-Off About The Size Of Two Sets</strong></p>
+<p><strong><span style="color: red;">Trade-Off About The Size Of Two Sets</span></strong></p>
 <p><span class="math display">\[
 \begin{equation}
 \text{Larger Training Set}\Rightarrow\cases{\text{Training is more robust}\\\text{Evaluation on test set is less reliable}}
 \end{equation}
 \]</span></p>
-<p><strong>How To Do The Split</strong></p>
+<p><strong><span style="color: red;">How To Do The Split</span></strong></p>
 <ul>
-<li>By stratified sampling w.r.t. the target variable <span class="math inline">\(\Rightarrow\)</span>
-Produce representative training and test sets.</li>
-<li>Split based on a <u><strong>time</strong></u> variable, e.g., Periods
-<span class="math inline">\(\Rightarrow\)</span> To evaluate how well a model extrapolates past time
-trends to future, unseen periods.</li>
+<li><p>By stratified sampling w.r.t. the target variable <span class="math inline">\(\Rightarrow\)</span> Produce representative training and test sets.</p></li>
+<li><p>Split based on a <u><strong>time</strong></u> variable, e.g., Periods <span class="math inline">\(\Rightarrow\)</span> To evaluate how well a model extrapolates past time trends to future, unseen periods.</p></li>
 </ul>
-<p><strong>How to Use Training/Test Set Split to Rank Competing Models</strong></p>
+<p><strong><span style="color: red;">How to Use Training/Test Set Split to Rank Competing
+Models</span></strong></p>
 <p>If we have multiple candidate models, then we can:</p>
 <ol style="list-style-type: decimal">
-<li>Fit them to the training set</li>
-<li>Evaluate the quality of these models on the test set</li>
-<li>Choose the model with the best test set performance according to a
-certain model criterion <span class="math inline">\(\Rightarrow\)</span> The test set will serve as the
-judge.</li>
-<li>To ensure a fair comparison, the same training set and test sets
-should be used across all candidate models.</li>
+<li><p>Fit them to the training set</p></li>
+<li><p>Evaluate the quality of these models on the test set</p></li>
+<li><p>Choose the model with the best test set performance according to a certain model criterion <span class="math inline">\(\Rightarrow\)</span> The test set will serve as the judge.</p></li>
+<li><p>To ensure a fair comparison, the same training set and test sets should be used across all candidate models.</p></li>
 </ol>
+<div class="rmdnote">
+<p>The test set above used to select the best model is more commonly referred to as the <span style="color: blue;"><strong>validation set</strong></span>.</p>
+<p>In many predictive modeling textbooks, the test set is where we obtain an independent measure of the prediction performance of your chosen model when it is applied to data not involved when training or selecting the final model. The test set is held out until the end.</p>
+</div>
+</div>
+<div id="common-performance-metrics" class="section level4 unnumbered hasAnchor">
+<h4>Common Performance Metrics<a href="overview-of-predictive-analytics.html#common-performance-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="general" class="section level5 unnumbered hasAnchor">
+<h5>General<a href="overview-of-predictive-analytics.html#general" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li><p><strong>Regression vs. Classification Problems:</strong></p>
+<ul>
+<li><p><strong><span style="color: red;">Regression:</span></strong> When Target is Numeric</p></li>
+<li><p><strong><span style="color: red;">Classification:</span></strong> When Target is Categorical.</p></li>
+</ul></li>
+<li><p><strong>What metrics computed on training and test set measure:</strong></p>
+<ul>
+<li><strong><span style="color: red;">Training:</span></strong> Goodness-of-fit to training data.</li>
+<li><strong><span style="color: red;">Test:</span></strong> Prediction performance on new,
+unseen data.</li>
+</ul></li>
+<li><p><strong>Loss Function:</strong> Most performance metrics use a <strong><em>loss function</em></strong> to <span style="color: red;"><strong>capture the discrepancy</strong></span> between the actual and predicted values for each observation of the target variable numerically.</p></li>
+</ul>
+<div id="square-loss" class="section level6 unnumbered hasAnchor">
+<h6>Square Loss<a href="overview-of-predictive-analytics.html#square-loss" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p><span class="math display">\[
+\begin{equation}
+\text{MSE}=\frac{1}{n} \sum_{i=1}^{N}(y_i-\hat{y}_i)^2
+\end{equation}
+\]</span>
+<span class="math display">\[
+\begin{equation}
+\text{RMSE}=\sqrt{\frac{1}{n} \sum_{i=1}^{N}(y_i-\hat{y}_i)^2}
+\end{equation}
+\]</span></p>
+<div class="rmdnote">
+<p>The <span style="color: blue;"><strong>advantage</strong></span> of RMSE over the MSE, is that it has
+the <span style="color: red;"><strong>same unit as the target variable, making it easier to
+interpret</strong></span>.</p>
+<p>We can <span style="color: blue;"><strong>interpret the RMSE</strong></span> as the <span style="color: red;"><strong>size of a
+typical residual or prediction error in absolute value produced by a
+model</strong></span>.</p>
+</div>
+</div>
+<div id="absolute-loss" class="section level6 unnumbered hasAnchor">
+<h6>Absolute Loss<a href="overview-of-predictive-analytics.html#absolute-loss" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p><span class="math display">\[
+\begin{equation}
+\text{MAE}=\frac{1}{n} \sum_{i=1}^{N}|{y_i-\hat{y}_i}|\\
+\textbf{Note: }\text{Absolute function places much less relative weight}\\
+\text{on the large errors and reduces the impact of outliers on the fitted model.}
+\end{equation}
+\]</span></p>
+<div class="rmdnote">
+<p>The <span style="color: blue;"><strong>Square Loss Function</strong></span> is more commonly used because it is <strong><span style="color: red;">differentiable and eases model fitting</span></strong>, which involves optimizing an objective function.</p>
+</div>
+<div class="rmdtip">
+<p><strong>Fitting vs. Evaluation:</strong> The <span style="color: blue;"><strong>Loss Function</strong></span> that defines the performance metric can the same as or different from the one that defines the objective function for training the model.</p>
+<ul>
+<li>We can, for example, use the square loss function to estimate the model parameters (e.g., method of least squares for linear models) and use the absolute loss function to measure model performance separately.</li>
+</ul>
+</div>
+</div>
+<div id="loss" class="section level6 unnumbered hasAnchor">
+<h6>0-1 Loss<a href="overview-of-predictive-analytics.html#loss" class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p><span class="math display">\[
+\begin{equation}
+\text{Classification Error Rate}=\frac{1}{n} \sum_{i=1}^{N}1_{\{y_i\ne\hat{y}_i\}}
+\end{equation}
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="sec-additional-metrics-for-binary-classification-problems" class="section level4 unnumbered hasAnchor">
+<h4>Additional Metrics for (Binary) Classification Problems<a href="overview-of-predictive-analytics.html#sec-additional-metrics-for-binary-classification-problems" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="classification-rule" class="section level5 unnumbered hasAnchor">
+<h5>Classification Rule<a href="overview-of-predictive-analytics.html#classification-rule" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><span class="math display">\[
+\begin{equation}
+\text{Predicted Probability for &quot;+&quot; &gt; }\color{blue}{Cutoff}\Leftrightarrow\text{Predicted Class = &quot;+&quot;}
+\end{equation}
+\]</span></p>
+</div>
+<div id="sec-confusion-matrices" class="section level5 unnumbered hasAnchor">
+<h5>Confusion Matrices<a href="overview-of-predictive-analytics.html#sec-confusion-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<table>
+<caption>Confusion Matrix</caption>
+<colgroup>
+<col width="30%" />
+<col width="39%" />
+<col width="30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Prediction</th>
+<th align="center">Reference (=Actual)</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"></td>
+<td align="center"><span class="math display">\[\textbf{-}\]</span></td>
+<td align="center"><span class="math display">\[\textbf{+}\]</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math display">\[\textbf{-}\]</span></td>
+<td align="center"><span class="math display">\[         
+                       \textbf{TN}     
+                           \]</span></td>
+<td align="center"><span class="math display">\[       
+                                          \textbf{FN}   
+                                              \]</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math display">\[\textbf{+}\]</span></td>
+<td align="center"><span class="math display">\[         
+                       \textbf{FP}     
+                           \]</span></td>
+<td align="center"><span class="math display">\[       
+                                          \textbf{TP}   
+                                              \]</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Metrics:</strong></p>
+<ul>
+<li><span class="math inline">\(\begin{equation}\color{red}{\textbf{Accuracy}}= \frac{TN + TP}{n} = \text{Proportion of correctly classified obs.}\end{equation}\)</span></li>
+<li><span class="math inline">\(\begin{equation}\color{red}{\textbf{Classification Error Rate}}= 1 - \color{red}{Accuracy} = \frac{FN + FP}{n}\end{equation}\)</span></li>
+<li><span class="math inline">\(\begin{equation}\color{red}{\textbf{Sensitivity}}= \frac{TP}{TP + FN} = \text{Proportion of +ve obs. correctly classified as +ve}\end{equation}\)</span></li>
+<li><span class="math inline">\(\begin{equation}\color{red}{\textbf{Specificity}}= \frac{TN}{TN + FP} = \text{Proportion of -ve obs. correctly classified as -ve}\end{equation}\)</span></li>
+<li><span class="math inline">\(\begin{equation}\color{red}{\textbf{Percision}}= \frac{TP}{TP + FP} = \text{Proportion of +ve obs. truly belonging to +ve}\end{equation}\)</span></li>
+</ul>
+<p><strong>Properties of Metrics:</strong></p>
+<ul>
+<li><p><strong><span style="color: red;">Higher (closer to 1) <span class="math inline">\(\bf{\Rightarrow}\)</span> Better</span></strong></p></li>
+<li><p>How certain metrics vary with cutoff:</p>
+<p><span class="math display">\[
+\begin{equation}
+\textbf{Cutoff}\uparrow\text{ }\Rightarrow \cases{\textbf{Sensitivity}\downarrow\\\textbf{Specificity}\uparrow }\\\text{May use a cost-benefit analysis to optimize cutoff.}
+\end{equation}
+\]</span></p></li>
+<li><p><strong>Weighted Average Relation:</strong></p>
+<p><span class="math display">\[
+\begin{equation}
+Accuracy = \frac{n_{-}}{n}*Specificity + \frac{n_{+}}{n}*Sensitivity
+\end{equation}
+\]</span></p></li>
+</ul>
+</div>
+<div id="sec-roc-curves" class="section level5 unnumbered hasAnchor">
+<h5>ROC Curves<a href="overview-of-predictive-analytics.html#sec-roc-curves" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li><p><strong><span style="color: red;">Plot sensitivity against specificity for all cutoffs from 0 to 1.</span></strong></p></li>
+<li><p>All ROC Curves share two special points:</p>
+<p><span class="math display">\[
+\begin{equation}
+\text{(specificity, sensitivity)} = \cases{
+(0,1), \text{ if cutoff}=0\\
+(1,0), \text{ if cutoff}=1}
+\end{equation}\]</span></p></li>
+<li><p><strong>Graphical assessment of classifier performance:</strong> The closer the curve is to the top-left corner <span class="math inline">\(\Rightarrow\)</span> the better.</p></li>
+</ul>
+</div>
+<div id="sec-area-under-roc-curve-auc" class="section level5 unnumbered hasAnchor">
+<h5>Area Under ROC Curve (AUC)<a href="overview-of-predictive-analytics.html#sec-area-under-roc-curve-auc" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li>Typically ranges between 0.50 (random classifier) and 1.00 (perfect classifier).</li>
+<li><strong>Quantitative assessment of classifier performance:</strong> Higher (closer to 1) <span class="math inline">\(\Rightarrow\)</span> Better</li>
+</ul>
+</div>
+</div>
+<div id="cross-validation" class="section level4 unnumbered hasAnchor">
+<h4>Cross Validation<a href="overview-of-predictive-analytics.html#cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
 </div>
 </div>

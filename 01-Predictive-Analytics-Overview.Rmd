@@ -439,52 +439,54 @@ of data:**
 
 #### Data Design {.unnumbered}
 
--   **Relevance:** Need to ensure data is [**unbiased**]{.underline}
-    (e.g., [**representative**]{.underline} of the environment where the
-    model will operate[)]{.underline}
-    -   **Population:** Data source should be a [**proxy**]{.underline}
-        of the true population of interest.
+-   **[Relevance]{color="red"}:** Need to ensure data is
+    [**unbiased**]{.underline} (e.g., [**representative**]{.underline}
+    of the environment where the model will operate[)]{.underline}
+    -   **[Population]{color="red"}:** Data source should be a
+        [**proxy**]{.underline} of the true population of interest.
         -   If the data source is not a good proxy, then taking a larger
             dataset does not help and [**repeats bias**]{.underline}
             over and over again.
-    -   **Time Frame:** Time period that best reflects the business
-        environment of interest.
+    -   **[Time Frame]{color="red"}:** Time period that best reflects
+        the business environment of interest.
         -   [**Recent history is more predictive of the near
             future**]{.underline}.
--   **Sampling:** The process of taking subsets of observations from the
-    data source to generate the dataset.
-    -   **Purpose:**
+-   **[Sampling]{color="red"}:** The process of taking subsets of
+    observations from the data source to generate the dataset.
+    -   **[Purpose]{color="red"}:**
         -   The underlying population is often too big to handle, and we
             need smaller, more manageable subset to form our data.
 
         -   The observations sampled should closely resemble the
             business environment in which our predictive model will be
             applied in the future.
-    -   **Types:**
-        -   **Random Sampling:** Randomly draw observations from the
-            underlying population [**without replacement**]{.underline}.
-            **Each record is equally likely to be selected.**
+    -   **[Types]{color="red"}:**
+        -   **[Random Sampling]{color="red"}:** Randomly draw
+            observations from the underlying population [**without
+            replacement**]{.underline}. **Each record is equally likely
+            to be selected.**
 
-        -   **Stratified Sampling:** Divide the underlying dataset into
-            a \# of non-overlapping "[**strata**]{.underline}" in a
-            [**non-random**]{.underline} fashion, then
-            [**randomly**]{.underline} sampling a set \# of observations
-            from each stratum, and finally combining these observations
-            to form the overall sample $\Rightarrow$ Ensures every
-            stratum is properly [**represented**]{.underline} in the
-            collected data in proportion to its importance.
+        -   **[Stratified Sampling]{color="red"}:** Divide the
+            underlying dataset into a \# of non-overlapping
+            "[**strata**]{.underline}" in a [**non-random**]{.underline}
+            fashion, then [**randomly**]{.underline} sampling a set \#
+            of observations from each stratum, and finally combining
+            these observations to form the overall sample $\Rightarrow$
+            Ensures every stratum is properly
+            [**represented**]{.underline} in the collected data in
+            proportion to its importance.
 
             **Ways to Define the "Strata":**
 
-            -   **W.R.T. the Target Variable:** Slice the distribution
-                of the target variable (numeric or categorical) into a
-                \# of non-overlapping regions and identify each region
-                as a stratum.
+            -   **[W.R.T. the Target Variable]{color="red"}:** Slice the
+                distribution of the target variable (numeric or
+                categorical) into a \# of non-overlapping regions and
+                identify each region as a stratum.
                 -   The sampled data will properly include observations
                     from the whole spectrum of the distribution of the
                     target.
-            -   **W.R.T. the Predictors:** The strata can also be
-                created from the predictors, usually factors.
+            -   **[W.R.T. the Predictors]{color="red"}:** The strata can
+                also be created from the predictors, usually factors.
                 -   If it is desired to have a sample with proportional
                     observations from Predictor 1 (a 3-level factor) and
                     from Predictor 2 (a 4-level factor), then we may use
@@ -493,17 +495,19 @@ of data:**
 
             **Special Cases of Stratified Sampling:**
 
-            -   **Oversampling** and **Undersampling:** These are
-                sampling methods designed specifically for unbalanced
-                data (Subsection 4.1.4)
+            -   **[Oversampling**]**{color="red"}** and
+                [**Undersampling]{color="red"}:** These are sampling
+                methods designed specifically for unbalanced data
+                (Subsection 4.1.4)
 
-            -   **Systematic Sampling:** Draw observations according to
-                a [**set pattern**]{.underline} and there is [**no
-                random mechanism**]{.underline} controlling which
-                observations are sampled.
--   **Granularity:** Refers to how [**precisely**]{.underline} a
-    variable is measured, i.e., level of [detail]{.underline} for the
-    information contained by the variable.
+            -   **[Systematic Sampling]{color="red"}:** Draw
+                observations according to a [**set
+                pattern**]{.underline} and there is [**no random
+                mechanism**]{.underline} controlling which observations
+                are sampled.
+-   **[Granularity]{color="red"}:** Refers to how
+    [**precisely**]{.underline} a variable is measured, i.e., level of
+    [detail]{.underline} for the information contained by the variable.
     -   At the data design stage, it is a [**good idea to use a
         relatively high level of granularity**]{.underline} as it is
         always possible to go from a higher level to a lower level down
@@ -571,131 +575,91 @@ kable(df,
 Information that can be used to trace an individual's identity, e.g.,
 SSN, address, photographs, and biometric records.
 
-[How to Handle PII:]{color="red"}
+[**How to Handle PII:**]{color="red"}
 
--   [**Anonymization:**] Anonymize the data to remove the PII.
+-   [**Anonymization:**]{color="red"} Anonymize the data to remove
+    the PII.
 
--   [**Data Security:**] Ensure that the data receives sufficient
-    protection (encryption, access/transfer rights).
+-   [**Data Security:**]{color="red"} Ensure that the data receives sufficient protection (encryption, access/transfer rights).
 
--   [**Terms of Use:**] Be well aware of the terms and conditions, and
-    the privacy policy related to the collection and use of data.
+-   [**Terms of Use:**]{color="red"} Be well aware of the terms and conditions, and the privacy policy related to the collection and use of data.
 
 ##### Variables with Legal/Ethical Concerns {#variables-with-legal-ethical-concerns .unnumbered}
 
--   **Sensitive Variables:** Different treatment based on sensitive
-    variables may lead to [**unfair discrimination**]{.underline} and
-    raise [**equity**]{.underline} concerns.
+-   **[Sensitive Variables:]{color="red"}** Different treatment based on sensitive variables may lead to **unfair discrimination** and raise **equity** concerns.
 
-    -   **Examples:** Race, ethnicity, gender, age, income, disability
-        status, and other prohibited classes.
+    -   **Examples:** Race, ethnicity, gender, age, income, disability status, and other prohibited classes.
+    
+-   **[Proxy Variables:]{color="red"}** Variables that are not prohibited variables themselves, but are closely related to (hence serve as a "proxy" of) prohibited variables.
+    
+    -   **Examples:** Occupation (possible proxy of gender); Geographical Location (possible proxy of age/income).
 
--   **Proxy Variables:** Variables that are not prohibited variables
-    themselves, but are closely related to (hence serve as a "proxy" of)
-    prohibited variables.
-
-    -   **Examples:** Occupation (possible proxy of gender);
-        Geographical Location (possible proxy of age/income).
 
 ##### Target Leakage {#sec-target-leakage .unnumbered}
 
--   **Definition:** When predictors in a model "leak" information about
-    the target variable that [**would not be available**]{.underline}
-    when the model is deployed in practice.
--   **Key to Detecting Target Leakage – Timing:** These variables are
-    observed [**at the same time as**]{.underline} or
-    [**after**]{.underline} the target variable.
--   **Problem With This Issue:** These variables cannot serve as
-    predictors in practice and [**would lead to artificially good model
-    performance**]{.underline} if mistakenly included.
--   **An Extreme and Commonly Tested Form of Target Leakage:** When the
-    target variable itself is included as a predictor or is used to
-    develop new features, e.g., PCA and cluster groups.
+-   **[Definition:]{color="red"}** When predictors in a model "leak" information about the target variable that **would not be
+    available** when the model is deployed in practice.
 
-Examples of Target Leakage:
+-   **[Key to Detecting Target Leakage – Timing:]{color="red"}** These variables are observed **at the same time as** or **after** the target variable.
 
-1.  Suppose that you are interested in predicting whether or not a
-    policyholder of an insurance policy will incur a loss or not in a
-    future policy period (binary target variable). If the number of
-    incurred losses is one of the predictors you use, then it appears
-    that you will be able to make perfect predictions. The knowledge of
-    number of incurred losses would not be available at the time we
-    predict the occurence of incurred losses in practice, and we cannot
-    use an unknown quantity to predict another unknown quantity. The
-    same applies for loss severity, which cannot function as a predictor
-    of loss incurrence in practice.
-2.  An extreme form of target leakage that is commonly tested is when
-    the target variable itself is included as a predictor, or is used to
-    develop new variables (e.g., principal components, to be introduced
-    in Section \@ref(6.1) for predicting the same target variable.
+-   **[Problem With This Issue:]{color="red"}** These variables cannot serve as predictors in practice and **would lead to artificially good model performance** if mistakenly included.
+
+-   **[An Extreme and Commonly Tested Form of Target Leakage:]{color="red"}** When the target variable itself is included as a predictor or is used to develop new features, e.g., PCA and cluster groups.
+
+**Examples of Target Leakage:**
+
+1.  Suppose that you are interested in predicting whether or not a policyholder of an insurance policy will incur a loss or not in a future policy period (binary target variable). If the number of incurred losses is one of the predictors you use, then it appears that you will be able to make perfect predictions. The knowledge of number of incurred losses would not be available at the time we predict the occurence of incurred losses in practice, and we cannot use an unknown quantity to predict another unknown quantity. The same applies for loss severity, which cannot function as a predictor of loss incurrence in practice.
+
+2.  An extreme form of target leakage that is commonly tested is when the target variable itself is included as a predictor, or is used to develop new variables (e.g., principal components, to be introduced in Section 6.1  for predicting the same target variable.
 
 ### Stage 3: Exploratory Data Analysis {#sec-stage-3-exploratory-data-analysis}
 
-After we have collected and validated the data, the next step is to
-perform exploratory data analysis, with the goal of understanding the
-characteristics of and the key relationships among variables in the
-data. This activity deserves a longer treatment and we will defer it to
-Chapter \@ref(2)
+After we have collected and validated the data, the next step is to perform exploratory data analysis, with the goal of understanding the characteristics of and the key relationships among variables in the data. This activity deserves a longer treatment and we will defer it to Chapter 2.
 
 ### Stage 4: Model Construction, Evaluation and Selection {#sec-stage-4-model-construction-evaluation-selection}
 
-If we use all of the collected data for model fitting, that will leave
-no independent data for assessing the prediction performance of our
-models.
+If we use all of the collected data for model fitting, that will leave no independent data for assessing the prediction performance of our models.
 
-#### **Training / Test Set Split** {#sec-training-test-set-split}
+#### **Training / Test Set Split** {#sec-training-test-set-split .unnumbered}
 
-To construct a model that thrives on future data, it is common practice
-to partition our data into a few parts, each of which serves a different
-role in the model development and evaluation process.
+To construct a model that thrives on future data, it is common practice to partition our data into a few parts, each of which serves a different role in the model development and evaluation process.
 
-In the simplest form, the partition splits the full data into two parts,
-the training set and the test set.
+In the simplest form, the partition splits the full data into two parts, the training set and the test set.
 
 1.  **Training Set (70-80% of Full Data):**
-    -   The larger part of the full data, the training set, is where you
-        "train", fit, or develop your predictive model to estimate the
-        signal function $f$ and, if needed, the model parameters.
-    -   The training is typically done by optimizing a certain objective
-        function that describes how well the model matches the training
-        observations.
-    -   After the model has been trained, it is ready for making
-        predictions on the other part of the full data.
+    -   The larger part of the full data, the training set, is where you "train", fit, or develop your predictive model to estimate the signal function $f$ and, if needed, the model parameters.
+    -   The training is typically done by optimizing a certain objective function that describes how well the model matches the training observations.
+    
+    -   After the model has been trained, it is ready for making predictions on the other part of the full data.
+
 2.  **Test Set (20-30% of Full Data):**
-    -   Following the fitting, you will apply the trained model to make
-        a prediction for each observation of the test set, or test data,
-        and assess the prediction performance of the model according to
-        certain performance metrics.
-    -   Observations in this test set did not participate in the model
-        training and will provide much more objective ground for
-        evaluating prediction performance when the model is applied to
-        new, future data.
-    -   In contrast, evaluating the model on the training set will give
-        an overly optimistic and somewhat misleading picture of its true
-        predictive performance – the model has already seen the training
-        observations and is merely fitting, not predicting those
-        observations.
+    -   Following the fitting, you will apply the trained model to make a prediction for each observation of the test set, or test data, and assess the prediction performance of the model according to certain performance metrics.
 
-**How Does it Work?**
+    -   Observations in this test set did not participate in the model training and will provide much more objective ground for evaluating prediction performance when the model is applied to new, future data.
 
-$$\underset{\Downarrow}{\text{Before fitting models, split the data
-into the training set (70-80%) and the test set (20-30%)}} \\
-\text{Models are fitted to} \Rightarrow \textbf{Training Set} \\
-\text{Prediction performance is evaluated on}\Rightarrow\textbf{Training Set}
-\\
+    -   In contrast, evaluating the model on the training set will give an overly optimistic and somewhat misleading picture of its true predictive performance – the model has already seen the training observations and is merely fitting, not predicting those observations.
 
+**[How Does it Work?]{color="red"}**
+
+$$
+\begin{equation}
+\underset{\Downarrow}{\text{Before fitting models, split the data
+into the training set (70-80%) and the test set (20-30%)}}\\
+\text{Models are fitted to} \Rightarrow \textbf{Training Set}\\
+\text{Prediction performance is evaluated on}\Rightarrow\textbf{Training Set}\\
 \text{Test set observations must be truly }\underline{unseen}\text{ to the trained model}
+\end{equation}
 $$
 
-**Why Do The Split?**
+**[Why Do The Split?]{color="red"}**
 
--   Model performance on the training set tends to be overly optimistic
-    and favor complex models.
--   Test set provides a more objective ground for assessing the
-    performance of models on new, unseen data.
+-   Model performance on the training set tends to be overly optimistic and favor complex models.
+
+-   Test set provides a more objective ground for assessing the performance of models on new, unseen data.
+
 -   Split replicates the way the model will be used in practice.
 
-**Trade-Off About The Size Of Two Sets**
+**[Trade-Off About The Size Of Two Sets]{color="red"}**
 
 $$
 \begin{equation}
@@ -703,34 +667,177 @@ $$
 \end{equation}
 $$
 
-**How To Do The Split**
+**[How To Do The Split]{color="red"}**
 
--   By stratified sampling w.r.t. the target variable $\Rightarrow$
-    Produce representative training and test sets.
--   Split based on a [**time**]{.underline} variable, e.g., Periods
-    $\Rightarrow$ To evaluate how well a model extrapolates past time
-    trends to future, unseen periods.
+-   By stratified sampling w.r.t. the target variable $\Rightarrow$ Produce representative training and test sets.
 
-**How to Use Training/Test Set Split to Rank Competing Models**
+-   Split based on a [**time**]{.underline} variable, e.g., Periods $\Rightarrow$ To evaluate how well a model extrapolates past time trends to future, unseen periods.
+
+**[How to Use Training/Test Set Split to Rank Competing
+Models]{color="red"}**
 
 If we have multiple candidate models, then we can:
 
 1.  Fit them to the training set
+
 2.  Evaluate the quality of these models on the test set
-3.  Choose the model with the best test set performance according to a
-    certain model criterion $\Rightarrow$ The test set will serve as the
-    judge.
-4.  To ensure a fair comparison, the same training set and test sets
-    should be used across all candidate models.
 
-```{block2, type='rmdnote'}
-The Test Set above is for selecting the best model and is more commonly referred to as the validation set.
+3.  Choose the model with the best test set performance according to a certain model criterion $\Rightarrow$ The test set will serve as the judge.
 
-In many predictive modeling textbooks, the test set is where we obtain an independent measure of the prediction performance of your chosen model when it is applied to data not involved in training or selecting the final model. The test set is held out until the end.
+4.  To ensure a fair comparison, the same training set and test sets should be used across all candidate models.
 
-```
+::: {.rmdnote data-latex="{EXAM NOTE}"}
+The test set above used to select the best model is more commonly referred to as the [**validation set**]{color="blue"}.
 
+In many predictive modeling textbooks, the test set is where we obtain an independent measure of the prediction performance of your chosen model when it is applied to data not involved when training or selecting the final model. The test set is held out until the end.
+:::
 
+#### Common Performance Metrics {.unnumbered}
+
+##### General {.unnumbered}
+
+-   **Regression vs. Classification Problems:**
+
+    -   **[Regression:]{color="red"}** When Target is Numeric
+
+    -   **[Classification:]{color="red"}** When Target is Categorical.
+
+-   **What metrics computed on training and test set measure:**
+
+    -   **[Training:]{color="red"}** Goodness-of-fit to training data.
+    -   **[Test:]{color="red"}** Prediction performance on new,
+        unseen data.
+
+-   **Loss Function:** Most performance metrics use a ***loss function*** to [**capture the discrepancy**]{color="red"} between the actual and predicted values for each observation of the target variable numerically.
+
+###### Square Loss {.unnumbered}
+
+$$
+\begin{equation}
+\text{MSE}=\frac{1}{n} \sum_{i=1}^{N}(y_i-\hat{y}_i)^2
+\end{equation}
+$$ 
+$$
+\begin{equation}
+\text{RMSE}=\sqrt{\frac{1}{n} \sum_{i=1}^{N}(y_i-\hat{y}_i)^2}
+\end{equation}
+$$
+
+::: {.rmdnote data-latex="{EXAM NOTE}"}
+The [**advantage**]{color="blue"} of RMSE over the MSE, is that it has
+the [**same unit as the target variable, making it easier to
+interpret**]{color="red"}.
+
+We can [**interpret the RMSE**]{color="blue"} as the [**size of a
+typical residual or prediction error in absolute value produced by a
+model**]{color="red"}.
+:::
+
+###### Absolute Loss {.unnumbered}
+
+$$
+\begin{equation}
+\text{MAE}=\frac{1}{n} \sum_{i=1}^{N}|{y_i-\hat{y}_i}|\\
+\textbf{Note: }\text{Absolute function places much less relative weight}\\
+\text{on the large errors and reduces the impact of outliers on the fitted model.} 
+\end{equation}
+$$
+
+::: {.rmdnote data-latex="{EXAM NOTE}"}
+The [**Square Loss Function**]{color="blue"} is more commonly used because it is **[differentiable and eases model fitting]{color="red"}**, which involves optimizing an objective function.
+:::
+
+::: {.rmdtip data-latex="{EXAM NOTE}"}
+**Fitting vs. Evaluation:** The [**Loss Function**]{color="blue"} that defines the performance metric can the same as or different from the one that defines the objective function for training the model.
+
+-   We can, for example, use the square loss function to estimate the model parameters (e.g., method of least squares for linear models) and use the absolute loss function to measure model performance separately.
+:::
+
+###### 0-1 Loss {.unnumbered}
+
+$$
+\begin{equation}
+\text{Classification Error Rate}=\frac{1}{n} \sum_{i=1}^{N}1_{\{y_i\ne\hat{y}_i\}}
+\end{equation}
+$$
+
+#### Additional Metrics for (Binary) Classification Problems {#sec-additional-metrics-for-binary-classification-problems .unnumbered}
+
+##### Classification Rule {.unnumbered}
+
+$$
+\begin{equation}
+\text{Predicted Probability for "+" > }\color{blue}{Cutoff}\Leftrightarrow\text{Predicted Class = "+"}
+\end{equation}
+$$
+
+##### Confusion Matrices {#sec-confusion-matrices .unnumbered}
+
+|   Prediction   | Reference (=Actual) |                |
+|:--------------:|:-------------------:|:--------------:|
+|                |   $$\textbf{-}$$    | $$\textbf{+}$$ |
+| $$\textbf{-}$$ |          $$         
+                       \textbf{TN}     
+                           $$          |       $$       
+                                          \textbf{FN}   
+                                              $$        |
+| $$\textbf{+}$$ |          $$         
+                       \textbf{FP}     
+                           $$          |       $$       
+                                          \textbf{TP}   
+                                              $$        |
+
+: Confusion Matrix
+
+**Metrics:**
+
+-   $\begin{equation}\color{red}{\textbf{Accuracy}}= \frac{TN + TP}{n} = \text{Proportion of correctly classified obs.}\end{equation}$
+-   $\begin{equation}\color{red}{\textbf{Classification Error Rate}}= 1 - \color{red}{Accuracy} = \frac{FN + FP}{n}\end{equation}$
+-   $\begin{equation}\color{red}{\textbf{Sensitivity}}= \frac{TP}{TP + FN} = \text{Proportion of +ve obs. correctly classified as +ve}\end{equation}$
+-   $\begin{equation}\color{red}{\textbf{Specificity}}= \frac{TN}{TN + FP} = \text{Proportion of -ve obs. correctly classified as -ve}\end{equation}$
+-   $\begin{equation}\color{red}{\textbf{Percision}}= \frac{TP}{TP + FP} = \text{Proportion of +ve obs. truly belonging to +ve}\end{equation}$
+
+**Properties of Metrics:**
+
+-   **[Higher (closer to 1) $\bf{\Rightarrow}$ Better]{color="red"}**
+
+-   How certain metrics vary with cutoff:
+
+    $$
+    \begin{equation}
+    \textbf{Cutoff}\uparrow\text{ }\Rightarrow \cases{\textbf{Sensitivity}\downarrow\\\textbf{Specificity}\uparrow }\\\text{May use a cost-benefit analysis to optimize cutoff.}
+    \end{equation}
+    $$
+
+-   **Weighted Average Relation:**
+
+    $$
+    \begin{equation}
+    Accuracy = \frac{n_{-}}{n}*Specificity + \frac{n_{+}}{n}*Sensitivity
+    \end{equation}
+    $$
+
+##### ROC Curves {#sec-roc-curves .unnumbered}
+
+-   **[Plot sensitivity against specificity for all cutoffs from 0 to 1.]{color="red"}**
+
+-   All ROC Curves share two special points:
+
+    $$
+    \begin{equation}
+    \text{(specificity, sensitivity)} = \cases{
+    (0,1), \text{ if cutoff}=0\\
+    (1,0), \text{ if cutoff}=1}
+    \end{equation}$$
+
+-   **Graphical assessment of classifier performance:** The closer the curve is to the top-left corner $\Rightarrow$ the better.
+
+##### Area Under ROC Curve (AUC) {#sec-area-under-roc-curve-auc .unnumbered}
+
+-   Typically ranges between 0.50 (random classifier) and 1.00 (perfect classifier).
+-   **Quantitative assessment of classifier performance:** Higher (closer to 1) $\Rightarrow$ Better
+
+#### Cross Validation {.unnumbered}
 
 ## Bias-Variance Trade-off {#bias-variance-trade-off}
 
