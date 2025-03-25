@@ -887,15 +887,45 @@ observations.</li>
 </ul></li>
 </ol>
 <p><strong>How Does it Work?</strong></p>
-<p>$$
-\underset{}{\text{Before fitting models, split the data into
-the training set (70-80%) and the test set (20-30%)}}
-\
+<p>$$\underset{}{\text{Before fitting models, split the data
+into the training set (70-80%) and the test set (20-30%)}} \
 \
 \</p>
 <p>
-$$
-<strong>Why Do The Split?</strong></p>
+$$</p>
+<p><strong>Why Do The Split?</strong></p>
+<ul>
+<li>Model performance on the training set tends to be overly optimistic
+and favor complex models.</li>
+<li>Test set provides a more objective ground for assessing the
+performance of models on new, unseen data.</li>
+<li>Split replicates the way the model will be used in practice.</li>
+</ul>
+<p><strong>Trade-Off About The Size Of Two Sets</strong></p>
+<p><span class="math display">\[
+\begin{equation}
+\text{Larger Training Set}\Rightarrow\cases{\text{Training is more robust}\\\text{Evaluation on test set is less reliable}}
+\end{equation}
+\]</span></p>
+<p><strong>How To Do The Split</strong></p>
+<ul>
+<li>By stratified sampling w.r.t. the target variable <span class="math inline">\(\Rightarrow\)</span>
+Produce representative training and test sets.</li>
+<li>Split based on a <u><strong>time</strong></u> variable, e.g., Periods
+<span class="math inline">\(\Rightarrow\)</span> To evaluate how well a model extrapolates past time
+trends to future, unseen periods.</li>
+</ul>
+<p><strong>How to Use Training/Test Set Split to Rank Competing Models</strong></p>
+<p>If we have multiple candidate models, then we can:</p>
+<ol style="list-style-type: decimal">
+<li>Fit them to the training set</li>
+<li>Evaluate the quality of these models on the test set</li>
+<li>Choose the model with the best test set performance according to a
+certain model criterion <span class="math inline">\(\Rightarrow\)</span> The test set will serve as the
+judge.</li>
+<li>To ensure a fair comparison, the same training set and test sets
+should be used across all candidate models.</li>
+</ol>
 </div>
 </div>
 </div>
